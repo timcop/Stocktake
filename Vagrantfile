@@ -29,6 +29,8 @@ Vagrant.configure("2") do |config|
     apt-get update
     apt-get install -y apache2
 
+    ## DATABASE ##
+
     ## MY_SQL TEMPLATE FROM https://altitude.otago.ac.nz/cosc349/vagrant-multivm/-/commit/b5b9636ba1e7b35eec3d092589d6bf965f53a6c4
     ## NOT MY OWN CODE
     export MYSQL_PWD='insecure_mysqlroot_pw'
@@ -45,6 +47,12 @@ Vagrant.configure("2") do |config|
 
     export MYSQL_PWD='insecure_db_pw'
     cat /vagrant/setup-database.sql | mysql -u user stocktake
+
+    ## WEB ##
+    cp /vagrant/test-website.conf /etc/apache2/sites-available/
+    a2ensite test-website
+    a2dissite 000-default
+    service apache2 reload
 
   SHELL
 end
