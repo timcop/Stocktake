@@ -28,5 +28,15 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get install -y apache2
+
+    ## MY_SQL TEMPLATE FROM https://altitude.otago.ac.nz/cosc349/vagrant-multivm/-/commit/b5b9636ba1e7b35eec3d092589d6bf965f53a6c4
+    ## NOT MY OWN CODE
+    export MYSQL_PWD='insecure_mysqlroot_pw'
+    echo "mysql-server mysql-server/root_password password $MYSQL_PWD" | debconf-set-selections 
+    echo "mysql-server mysql-server/root_password_again password $MYSQL_PWD" | debconf-set-selections
+    apt-get -y install mysql-server
+
+    ## Leaving out databse creation for now, just want to see installation works as well as login
+
   SHELL
 end
