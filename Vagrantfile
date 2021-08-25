@@ -37,13 +37,14 @@ Vagrant.configure("2") do |config|
     apt-get -y install mysql-server
 
     # Create test database
-    echo "CREATE DATABASE products;" | mysql
+    echo "CREATE DATABASE stocktake;" | mysql
 
     # Create a user and grant privliges 
     echo "CREATE USER 'user'@'%' IDENTIFIED BY 'insecure_db_pw';" | mysql
-    echo "GRANT ALL PRIVILEGES ON products.* TO 'user'@'%'" | mysql
+    echo "GRANT ALL PRIVILEGES ON stocktake.* TO 'user'@'%'" | mysql
 
     export MYSQL_PWD='insecure_db_pw'
+    cat /vagrant/setup-database.sql | mysql -u user stocktake
 
   SHELL
 end
