@@ -59,3 +59,7 @@ We plan to use 3 VM's to facilitate the needs of our application:
 1. A database server which will store all of the tables needed for both the manager and owner
 2. A webclient which provides the tools for the manager
 3. A webclient which provides the tools for the owner/admin
+
+## Links 
+
+- [Apache Server Docs](http://httpd.apache.org/docs/2.4/mod/core.html#virtualhost)
