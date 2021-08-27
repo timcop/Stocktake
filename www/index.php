@@ -1,6 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
         <title>Database test page</title>
         <style>
             th { text-align: left; }
@@ -19,10 +20,10 @@
     <body>
         <h1>Database test page</h1>
 
-        <p>Showing contents of papers table:</p>
+        <p>Welcome to the stocktaking site!</p>
 
         <table border="1">
-            <tr><th>Paper code</th><th>Paper name</th></tr>
+            <tr><th>Product Name</th><th>Product Type</th></tr>
 
             <?php
             
