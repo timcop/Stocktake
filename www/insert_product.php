@@ -6,10 +6,11 @@
 
     $product_name = $_REQUEST['name'];
     $product_type = $_REQUEST['type'];
+    $desired_quantity = $_REQUEST['dq'];
 
     $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
     $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-    $sql = "INSERT INTO Products (name, type) VALUES ('" . $product_name . "','" . $product_type . "')";
+    $sql = "INSERT INTO Products (name, type) VALUES ('" . $product_name . "','" . $product_type . "','" . $desired_quantity . "')";
     $pdo->exec($sql)
 ?>

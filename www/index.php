@@ -23,7 +23,7 @@
         <p>Welcome to the stocktaking site!</p>
 
         <table border="1">
-            <tr><th>Product Name</th><th>Product Type</th></tr>
+            <tr><th>Product Name</th><th>Product Type</th><th>Desired Quantity</th></tr>
 
             <?php
             
@@ -39,7 +39,7 @@
                 $q = $pdo->query("SELECT * FROM Products");
 
                 while($row = $q->fetch()){
-                echo "<tr><td>".$row["name"]."</td><td>".$row["type"]."</td></tr>\n";
+                echo "<tr><td>".$row["name"]."</td><td>".$row["type"]."</td><td>".$row["desired_quantity"]."</td></tr>\n";
                 }
                 
             ?>
