@@ -26,7 +26,7 @@
         <h2>Previous Stocktakes:</h2>
 
         <table border="1">
-            <tr><th>Stocktake#</th><th>Date</th></tr>
+            <tr><th>Stocktake #</th><th>Date</th></tr>
 
             <?php
             
@@ -50,7 +50,7 @@
 
         <h2>Current Stocktake Products</h2>
         <table border="1">
-            <tr><th>Product Name</th><th>Product Type</th><th>Desried Quantity</th></tr>
+            <tr><th>Product Name</th><th>Product Type</th><th>Desired Quantity</th></tr>
             <?php
 
                 $db_host   = '127.0.0.1';
