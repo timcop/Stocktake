@@ -85,7 +85,7 @@
         </section>
         <section>
             <h2 id="start_text">Start a Stocktake</h2>
-            <form method="post" enctype="aplication/x-www-form-urlencoded" action="submit_stocktake.php">
+            <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/submit_stocktake.php">
                 <fieldset>
                     <div>
                         <p>Product Name</p>

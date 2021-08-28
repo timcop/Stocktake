@@ -39,8 +39,6 @@
     // echo $max;
     // echo $stock_num;
    
-
-    
     // Insert prods with their current counts 
     $q = $pdo->query("SELECT * FROM Products");
     $count = 0;

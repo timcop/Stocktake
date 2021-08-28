@@ -47,7 +47,7 @@
                 echo $row['dt'];
                 echo '</td><td>';
                 echo $row['stock_num'];
-                echo '<td><a href="redirect.php?id='.$row['stock_num'].'"><input type="submit" name="submit" 
+                echo '<td><a href="scripts/records.php?id='.$row['stock_num'].'"><input type="submit" name="submit" 
                 value="Open" class="Register" /></a></td>';
                 }
                 
@@ -79,7 +79,7 @@
 
         <section>
             <h2>Add a new Product.</h2>
-            <form method="post" enctype="aplication/x-www-form-urlencoded" action="insert_product.php">
+            <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
                 <fieldset>
                     <label for="name">Name of Product: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
                     <label for="type">Type of Product: </label>
@@ -93,7 +93,7 @@
             </form>
             
             <h2>Delete a Product</h2>
-            <form method="post" enctype="aplication/x-www-form-urlencoded" action="delete_product.php">
+            <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/delete_product.php">
                 <fieldset>
                     <select name="product" id="name">
                         <?php
