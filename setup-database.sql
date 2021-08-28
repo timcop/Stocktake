@@ -20,5 +20,3 @@ CREATE TABLE StocktakeProds (
 	 stock_num INTEGER NOT NULL
  );
 
-INSERT INTO StocktakeProds VALUES ('a', 'a', 10, 10, 1);
-INSERT INTO StocktakeProds VALUES ('b', 'b', 10, 10, 2);

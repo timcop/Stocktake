@@ -26,12 +26,12 @@
         <h2>Previous Stocktakes:</h2>
 
         <table border="1">
-            <tr><th>Stocktake #</th><th>Date</th></tr>
+            <tr><th>Date</th><th>StocktakeID</th><th>Go to stocktake</th></tr>
 
             <?php
             
                 $db_host   = '127.0.0.1';
-                $db_name   = 'owner';
+                $db_name   = 'stocktake';
                 $db_user   = 'root';
                 $db_passwd = 'insecure_mysqlroot_pw';
 
@@ -39,10 +39,16 @@
 
                 $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-                $q = $pdo->query("SELECT * FROM Stocktakes");
+                $q = $pdo->query("SELECT * FROM StocktakeRefs");
 
                 while($row = $q->fetch()){
-                echo "<tr><td>".$row["uid"]."</td><td>".$row["date"]."</td></tr>\n";
+                // echo "<tr><td>".$row["dt"]."</td><td>".$row["stock_num"]."</td><td><button onclick=window.location.href='redirect.php'>Open</button></td></tr> \n";
+                echo '<tr><td>';
+                echo $row['dt'];
+                echo '</td><td>';
+                echo $row['stock_num'];
+                echo '<td><a href="redirect.php?id='.$row['stock_num'].'"><input type="submit" name="submit" 
+                value="Open" class="Register" /></a></td>';
                 }
                 
             ?>
