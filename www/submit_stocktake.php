@@ -38,6 +38,8 @@
 
     // echo $max;
     // echo $stock_num;
+   
+
     
     // Insert prods with their current counts 
     $q = $pdo->query("SELECT * FROM Products");
@@ -47,6 +49,14 @@
         $pdo->exec($sql);
         $count++;
     }
+
+    ### Add the reference to stocktake_refs
+    date_default_timezone_set('Pacific/Auckland');
+    $date = date('y-n-d H:i:s');
+    echo $date;
+
+    $pdo->exec("INSERT INTO StocktakeRefs VALUES ('$date', $stock_num)");
+
 ?>
 
 
