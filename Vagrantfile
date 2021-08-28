@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
 
     # Create test database
     echo "CREATE DATABASE stocktake;" | mysql
-    echo "CREATE DATABASE owner;" | mysql
+    # echo "CREATE DATABASE owner;" | mysql
 
     # Create a user and grant privliges 
     echo "CREATE USER 'user'@'%' IDENTIFIED BY 'insecure_db_pw';" | mysql
@@ -50,8 +50,8 @@ Vagrant.configure("2") do |config|
     export MYSQL_PWD='insecure_db_pw'
     cat /vagrant/setup-database.sql | mysql -u user stocktake
 
-    export MYSQL_PWD='insecure_mysqlroot_pw'
-    cat /vagrant/setup-admin-database.sql | mysql -u root owner
+    # export MYSQL_PWD='insecure_mysqlroot_pw'
+    # cat /vagrant/setup-admin-database.sql | mysql -u root owner
 
     ## WEB ##
     cp /vagrant/test-website.conf /etc/apache2/sites-available/

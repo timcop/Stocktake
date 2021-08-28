@@ -85,7 +85,7 @@
         </section>
         <section>
             <h2 id="start_text">Start a Stocktake</h2>
-            <form method="post" enctype="aplication/x-www-form-urlencoded" action="">
+            <form method="post" enctype="aplication/x-www-form-urlencoded" action="submit_stocktake.php">
                 <fieldset>
                     <div>
                         <p>Product Name</p>
@@ -113,7 +113,7 @@
                                 <p>" . $row["type"] . "</p>\n
                                 <p>" . $row["desired_quantity"] . "</p>\n
                                 <div>\n
-                                    <input type='number' min='0' max='1000' name='product" . $productnum . "' required>\n
+                                    <input type='number' min='0' max='1000' name='curr_count[]' required>\n
                                 </div>\n
                               </div>\n";
                     }

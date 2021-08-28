@@ -1,7 +1,1 @@
-CREATE TABLE Stocktakes (
-	date VARCHAR(50) NOT NULL,
-	uid VARCHAR(10) NOT NULL
- );
 
-INSERT INTO Stocktakes VALUES ('12/02/1998', '1');
-INSERT INTO Stocktakes VALUES ('01/01/2000', '2');
