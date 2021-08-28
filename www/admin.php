@@ -42,7 +42,6 @@
                 $q = $pdo->query("SELECT * FROM StocktakeRefs");
 
                 while($row = $q->fetch()){
-                // echo "<tr><td>".$row["dt"]."</td><td>".$row["stock_num"]."</td><td><button onclick=window.location.href='redirect.php'>Open</button></td></tr> \n";
                 echo '<tr><td>';
                 echo $row['dt'];
                 echo '</td><td>';
@@ -56,7 +55,7 @@
 
         <h2>Current Stocktake Products</h2>
         <table border="1">
-            <tr><th>Product Name</th><th>Product Type</th><th>Desired Quantity</th></tr>
+            <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Full Weight(g)</th><th>Empty Weight(g)</th><th>Desired Quantity</th></tr>
             <?php
 
                 $db_host   = '127.0.0.1';
@@ -71,7 +70,21 @@
                 $q = $pdo->query("SELECT * FROM Products");
 
                 while($row = $q->fetch()){
-                echo "<tr><td>".$row["name"]."</td><td>".$row["type"]."</td><td>".$row["desired_quantity"]."</td></tr>\n";
+                echo '<tr><td>';
+                echo $row["name"];
+                echo '</td><td>';
+                echo $row["type"];
+                echo '</td><td>';
+                echo $row["unit"];
+                echo '</td><td>';
+                echo $row["vol"];
+                echo '</td><td>';
+                echo $row["full_weight"];
+                echo '</td><td>';
+                echo $row["empty_weight"];
+                echo '</td><td>';
+                echo $row["desired_quantity"];
+                echo '</td></tr>';
                 }
                 
             ?>
@@ -82,11 +95,22 @@
             <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
                 <fieldset>
                     <label for="name">Name of Product: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
-                    <label for="type">Type of Product: </label>
+                    <label for="type">Product Type: </label>
                     <select name="type" id="type">
                         <option value="Spirit">Spirit</option>
                         <option value="Beer">Beer</option>
+                        <option value="Mixers">Mixers</option>
+                        <option value="Misc">Misc</option>
                     </select>
+                    <label for="unit">Unit: </label>
+                    <select name="unit" id ="unit">
+                        <option value="ml">ml</option>
+                        <option value="L">L</option>
+                        <option value="each">each</option>
+                    </select>
+                    <label for="volume">Volume: </label><input type="number" placeholder="Volume" id="volume" name="volume" min="0">
+                    <label for="full_weight">Full Weight(g): </label><input type="number" placeholder="Full Weight" id="full_weight" name="full_weight" min="0">
+                    <label for="empty_weight">EmptyWeight(g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" name="empty_weight" min="0">
                     <label for="dq">Desired Quantity: (1-1000)</label><input type="number" id="dq" name="dq" min="1" max="1000" required>
                     <input type="submit" value="Submit">
                 </fieldset>

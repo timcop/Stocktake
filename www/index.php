@@ -61,14 +61,13 @@
         <section>
         <h2>Current Products</h2>
             <table>
-                <tr><th>Product Name</th><th>Product Type</th><th>Desired Quantity</th></tr>
-
+                <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Full Weight(g)</th><th>Empty Weight(g)</th><th>Desired Quantity</th></tr>
                 <?php
-                
+
                     $db_host   = '127.0.0.1';
                     $db_name   = 'stocktake';
-                    $db_user   = 'user';
-                    $db_passwd = 'insecure_db_pw';
+                    $db_user   = 'root';
+                    $db_passwd = 'insecure_mysqlroot_pw';
 
                     $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
@@ -77,7 +76,21 @@
                     $q = $pdo->query("SELECT * FROM Products");
 
                     while($row = $q->fetch()){
-                        echo "<tr><td>".$row["name"]."</td><td>".$row["type"]."</td><td>".$row["desired_quantity"]."</td></tr>\n";
+                    echo '<tr><td>';
+                    echo $row["name"];
+                    echo '</td><td>';
+                    echo $row["type"];
+                    echo '</td><td>';
+                    echo $row["unit"];
+                    echo '</td><td>';
+                    echo $row["vol"];
+                    echo '</td><td>';
+                    echo $row["full_weight"];
+                    echo '</td><td>';
+                    echo $row["empty_weight"];
+                    echo '</td><td>';
+                    echo $row["desired_quantity"];
+                    echo '</td></tr>';
                     }
                     
                 ?>
@@ -119,6 +132,37 @@
                     }
                     ?>
                     <input id="submit_stocktake" type="submit" value="Submit Stocktake">
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h2 id="converter">Calculator to convert weight into volume!</h2>
+            <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/calculate.php" text-align="left">
+                <fieldset>
+                    <select name="product" id="name">
+                        <?php
+                            $db_host   = '127.0.0.1';
+                            $db_name   = 'stocktake';
+                            $db_user   = 'user';
+                            $db_passwd = 'insecure_db_pw';
+        
+                            $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+        
+                            $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+
+                            $sql = "SELECT name FROM Products";
+                            $q = $pdo->query($sql);
+
+                            while ($row = $q->fetch()) {
+                                ?>
+                                <option value="name1"><?php echo $row['name']; ?> </option>
+                                <?php
+                            }
+                            ?>
+                    </select>
+                    <label for="current_weight">Current Weight (g): </label>
+                    <input type="number" placeholder="Current Weight" id="current_weight" name="current_weight" min="0">
+                    <input type="submit" value="Calculate!">
                 </fieldset>
             </form>
         </section>

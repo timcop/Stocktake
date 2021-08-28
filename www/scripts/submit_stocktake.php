@@ -43,7 +43,7 @@
     $q = $pdo->query("SELECT * FROM Products");
     $count = 0;
     while ($row = $q->fetch()) {
-        $sql = "INSERT INTO StocktakeProds VALUES ('$row[name]', '$row[type]', $row[desired_quantity], $curr_counts[$count], $stock_num)";
+        $sql = "INSERT INTO StocktakeProds (name, type, desired_quantity, current_quantity, stocktake_num) VALUES ('$row[name]', '$row[type]', $row[desired_quantity], $curr_counts[$count], $stock_num)";
         $pdo->exec($sql);
         $count++;
     }
