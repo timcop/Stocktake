@@ -62,4 +62,9 @@ We plan to use 3 VM's to facilitate the needs of our application:
 
 ## Links 
 
+### Documentation
 - [Apache Server Docs](http://httpd.apache.org/docs/2.4/mod/core.html#virtualhost)
+
+### Cheatsheets 
+- [Mysql](https://devhints.io/mysql)
+- [CSS](https://imgur.com/BctTkBu)
