@@ -5,21 +5,34 @@
         <title>Database test page</title>
         <style>
 
-            #start_text {
+            table {
+                margin: auto;
+            }
+
+            h1, h2, p {
                 text-align: center;
+            }
+
+            #stocktake {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            }
+
+            #stocktake p:nth-child(-n+8) {
+                border: 1px solid;
             }
 
             #submit_stocktake {
                 margin: auto;
                 width: 10em;
-                display: block;
+                grid-column: span 8;
             }
 
             th { 
                 text-align: left; 
             }
 
-            table, th, td {
+            table, th, td, fieldset {
             border: 2px solid grey;
             border-collapse: collapse;
             }
@@ -33,24 +46,6 @@
                 text-align: center;
             }
 
-            form fieldset > div {
-                margin: auto;
-                width: 60%;
-            }
-
-            form fieldset div p, div {
-                width: 20%;
-                display: inline-block;
-            }
-
-            form fieldset div input {
-                width: 3.8em;
-                display: inline-block;
-            }
-
-            form fieldset div:first-of-type p {
-                border: 1px solid;
-            }
         </style>
     </head>
 
@@ -61,7 +56,7 @@
         <section>
         <h2>Current Products</h2>
             <table>
-                <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Full Weight(g)</th><th>Empty Weight(g)</th><th>Desired Quantity</th></tr>
+                <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
                 <?php
 
                     $db_host   = '127.0.0.1';
@@ -99,13 +94,15 @@
         <section>
             <h2 id="start_text">Start a Stocktake</h2>
             <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/submit_stocktake.php">
-                <fieldset>
-                    <div>
-                        <p>Product Name</p>
-                        <p>Product Type</p>
-                        <p>Desired Quantity</p>
-                        <p>Current Quantity (0-1000)</p>
-                    </div>
+                <fieldset id="stocktake">
+                    <p>Product Name</p>
+                    <p>Product Type</p>
+                    <p>Unit</p>
+                    <p>Volume</p>
+                    <p>Full Weight</p>
+                    <p>Empty Weight</p>
+                    <p>Desired Quantity</p>
+                    <p>Current Quantity (0-1000)</p>
                     <?php
                         
                     $db_host   = '127.0.0.1';
@@ -121,14 +118,14 @@
                     $product_num = 0;
                     while($row = $q->fetch()){
                         $product_num++;
-                        echo "<div>\n
-                                <p>" . $row["name"] . "</p>\n
-                                <p>" . $row["type"] . "</p>\n
-                                <p>" . $row["desired_quantity"] . "</p>\n
-                                <div>\n
-                                    <input type='number' min='0' max='1000' name='curr_count[]' required>\n
-                                </div>\n
-                              </div>\n";
+                        echo "<p>" . $row["name"] . "</p>\n
+                              <p>" . $row["type"] . "</p>\n
+                              <p>" . $row["unit"] . "</p>\n
+                              <p>" . $row["Volume"] . "</p>\n
+                              <p>" . $row["full_weight"] . "</p>\n
+                              <p>" . $row["empty_weight"] . "</p>\n
+                              <p>" . $row["desired_quantity"] . "</p>\n
+                              <input type='number' min='0' max='1000' name='curr_count[]' required>\n";
                     }
                     ?>
                     <input id="submit_stocktake" type="submit" value="Submit Stocktake">
