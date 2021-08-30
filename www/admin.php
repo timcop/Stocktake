@@ -109,21 +109,33 @@
                 $q = $pdo->query("SELECT * FROM Products");
 
                 while($row = $q->fetch()){
-                echo '<tr><td>';
-                echo $row["name"];
-                echo '</td><td>';
-                echo $row["type"];
-                echo '</td><td>';
-                echo $row["unit"];
-                echo '</td><td>';
-                echo $row["vol"];
-                echo '</td><td>';
-                echo $row["full_weight"];
-                echo '</td><td>';
-                echo $row["empty_weight"];
-                echo '</td><td>';
-                echo $row["desired_quantity"];
-                echo '</td></tr>';
+                    echo '<tr><td>';
+                    echo $row["name"];
+                    echo '</td><td>';
+                    echo $row["type"];
+                    echo '</td><td>';
+                    echo $row["unit"];
+                    echo '</td><td>';
+                    if ($row['vol'] == NULL) {
+                        echo "-";
+                    } else {
+                        echo $row["vol"];
+                    }
+                    echo '</td><td>';
+                    if ($row['full_weight'] == NULL) {
+                        echo "-";
+                    } else {
+                        echo $row["full_weight"];
+                    }
+                    echo '</td><td>';
+                    if ($row['empty_weight'] == NULL) {
+                        echo "-";
+                    } else {
+                        echo $row["empty_weight"];
+                    }
+                    echo '</td><td>';
+                    echo $row["desired_quantity"];
+                    echo '</td></tr>';
                 }
                 
             ?>

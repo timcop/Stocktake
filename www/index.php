@@ -15,17 +15,17 @@
 
             #stocktake {
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
             }
 
-            #stocktake p:nth-child(-n+8) {
+            #stocktake p:nth-child(-n+4) {
                 border: 1px solid;
             }
 
             #submit_stocktake {
                 margin: auto;
                 width: 10em;
-                grid-column: span 8;
+                grid-column: span 4;
             }
 
             th { 
@@ -71,21 +71,33 @@
                     $q = $pdo->query("SELECT * FROM Products");
 
                     while($row = $q->fetch()){
-                    echo '<tr><td>';
-                    echo $row["name"];
-                    echo '</td><td>';
-                    echo $row["type"];
-                    echo '</td><td>';
-                    echo $row["unit"];
-                    echo '</td><td>';
-                    echo $row["vol"];
-                    echo '</td><td>';
-                    echo $row["full_weight"];
-                    echo '</td><td>';
-                    echo $row["empty_weight"];
-                    echo '</td><td>';
-                    echo $row["desired_quantity"];
-                    echo '</td></tr>';
+                        echo '<tr><td>';
+                        echo $row["name"];
+                        echo '</td><td>';
+                        echo $row["type"];
+                        echo '</td><td>';
+                        echo $row["unit"];
+                        echo '</td><td>';
+                        if ($row['vol'] == NULL) {
+                            echo "-";
+                        } else {
+                            echo $row["vol"];
+                        }
+                        echo '</td><td>';
+                        if ($row['full_weight'] == NULL) {
+                            echo "-";
+                        } else {
+                            echo $row["full_weight"];
+                        }
+                        echo '</td><td>';
+                        if ($row['empty_weight'] == NULL) {
+                            echo "-";
+                        } else {
+                            echo $row["empty_weight"];
+                        }
+                        echo '</td><td>';
+                        echo $row["desired_quantity"];
+                        echo '</td></tr>';
                     }
                     
                 ?>
@@ -97,10 +109,6 @@
                 <fieldset id="stocktake">
                     <p>Product Name</p>
                     <p>Product Type</p>
-                    <p>Unit</p>
-                    <p>Volume</p>
-                    <p>Full Weight</p>
-                    <p>Empty Weight</p>
                     <p>Desired Quantity</p>
                     <p>Current Quantity (0-1000)</p>
                     <?php
@@ -120,12 +128,12 @@
                         $product_num++;
                         echo "<p>" . $row["name"] . "</p>\n
                               <p>" . $row["type"] . "</p>\n
-                              <p>" . $row["unit"] . "</p>\n
-                              <p>" . $row["Volume"] . "</p>\n
-                              <p>" . $row["full_weight"] . "</p>\n
-                              <p>" . $row["empty_weight"] . "</p>\n
-                              <p>" . $row["desired_quantity"] . "</p>\n
-                              <input type='number' min='0' max='1000' name='curr_count[]' required>\n";
+                              <p>" . $row["desired_quantity"] . "</p>\n";
+                        if($row["unit"] == "each") {
+                            echo "<input type='number' min='0' name='curr_count[]' required>\n";
+                        } else {
+                            echo "<input type='number' min='0' name='curr_count[]' step='any' required>\n";
+                        }
                     }
                     ?>
                     <input id="submit_stocktake" type="submit" value="Submit Stocktake">
