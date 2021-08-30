@@ -34,4 +34,6 @@
         $sql = "UPDATE Products SET empty_weight=$product_emptyWeight WHERE name='$product_name'";
         $pdo->exec($sql);
     }
+
+    echo "<script>location.href='../admin.php'</script>";
 ?>
