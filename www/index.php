@@ -4,6 +4,37 @@
         <meta charset="utf-8">
         <title>Database test page</title>
         <link rel="stylesheet" href="style.css" type="text/css">
+        <script>
+            function calculateVolume(element) {
+                var values = document.getElementById('converter').selectedOptions[0].value
+
+                var current_weight = document.getElementById('current_weight').value;
+                console.log(current_weight);
+                var current_int = parseInt(current_weight);
+
+                if (Number.isNaN(current_int)) {
+                    document.querySelectorAll('#vol_calc').forEach(function(element) {
+                        element.innerHTML = "Please enter a current weight.";
+                        element.style.display = "block";
+                    });
+                } else {
+                    // Everything is still a string.
+                    var vol_array = values.split(" ");
+                    var unit = vol_array[0];
+                    var empty_weight = vol_array[1];
+                    var full_vol = vol_array[2];
+                    var vol = current_int - parseInt(empty_weight);
+                    var percentage = vol / full_vol;
+                    percentage = Math.round(percentage*100);
+                    // Set vol calc to what we want.
+                    document.querySelectorAll('#vol_calc').forEach(function(element) {
+                        element.innerHTML = vol.toString() + unit + ", or " 
+                        + percentage + "% of 1 bottle.";
+                        element.style.display = "block";
+                    });
+                }
+            }
+        </script>
     </head>
 
     <body>
@@ -86,10 +117,10 @@
             </form>
         </section>
         <section>
-            <h2 id="converter">Calculator to convert weight into volume!</h2>
-            <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/calculate.php" text-align="left">
+            <h2>Calculator to convert weight into volume!</h2>
+            <form>
                 <fieldset>
-                    <select name="product" id="name">
+                    <select name="product" id="converter">
                         <?php
                             $db_host   = '127.0.0.1';
                             $db_name   = 'stocktake';
@@ -100,19 +131,23 @@
         
                             $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-                            $sql = "SELECT name FROM Products";
+                            $sql = "SELECT * FROM Products";
                             $q = $pdo->query($sql);
 
                             while ($row = $q->fetch()) {
-                                ?>
-                                <option value="name1"><?php echo $row['name']; ?> </option>
-                                <?php
+                                if ($row['unit'] != 'each') {
+                                    echo "<option value='" . $row['unit'] . " " .
+                                                             $row['empty_weight'] . " " .
+                                                             $row['vol'] . 
+                                        "'>" . $row['name'] . "</option>\n";
+                                }
                             }
-                            ?>
+                        ?>
                     </select>
                     <label for="current_weight">Current Weight (g): </label>
                     <input type="number" placeholder="Current Weight" id="current_weight" name="current_weight" min="0">
-                    <input type="submit" value="Calculate!">
+                    <input type="button" value="Calculate!" onclick="calculateVolume(this)">
+                    <p id="vol_calc"></p>
                 </fieldset>
             </form>
         </section>

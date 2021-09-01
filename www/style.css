@@ -20,6 +20,10 @@ h1, h2, p {
     text-align: center;
 }
 
+#vol_calc {
+    display: none;
+}
+
 #add_product {
     padding-top: 1em;
     display: grid;
