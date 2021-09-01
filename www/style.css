@@ -1,0 +1,119 @@
+body {
+    background-color: #6480CC;
+}
+
+table {
+    margin: auto;
+    padding: 1em 1em;
+}
+
+/* Font theme */
+h1, h2, p, th, td, label, input, select{
+    font-family: "Helvetica", Sans-serif;
+}
+
+h1, h2, p, th, td, label {
+    color: #F0F3F6;
+}
+
+h1, h2, p {
+    text-align: center;
+}
+
+#add_product {
+    padding-top: 1em;
+    display: grid;
+    grid-template-columns: 12em 10em;
+    row-gap: 0.6em;
+}
+
+#submit_product {
+    margin: auto;
+    width: 6em;
+    grid-column: span 2;
+}
+
+#delete_product select, #delete_product input {
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    text-align: center;
+    display: block;
+    width: 20em;
+}
+
+#blank_cell {
+    padding-left: 1em;
+}
+
+.admin_section {
+    margin: auto;
+    width: 40%;
+}
+
+input, select {
+    margin: auto;
+    display: inline-block;
+    width: 10em;
+}
+
+fieldset {
+    width: 60%;
+    margin: auto;
+}
+
+#stocktake {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#stocktake p:nth-child(-n+4) {
+    margin-left: 1em;
+    margin-right: 1em;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#stocktake p + input {
+    height: 1em;
+    width: 8em;
+    margin: auto;
+}
+
+.current th {
+    width: 10em;
+}
+
+.current td {
+    height: 1em;
+    /* width: 9em; */
+}
+
+#submit_stocktake {
+    margin: auto;
+    margin-top: 1.5em;
+    width: 10em;
+    grid-column: span 4;
+}
+
+th { 
+    text-align: left;
+    font-size: 1.05em;
+}
+
+fieldset {
+    border: none;
+}
+
+table, th, td, fieldset {
+background-color: #7DA0FF;
+border-radius: 15px;
+}
+
+th, td {
+    padding: 0.2em;
+}
+
+form { 
+    margin: auto;
+    text-align: center;
+}

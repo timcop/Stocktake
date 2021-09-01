@@ -2,65 +2,7 @@
 <html lang="en">
     <head>
         <title>Admin Database test page</title>
-        <style>
-
-            h1, h2 {
-                text-align: center;
-            }
-
-            table { 
-                margin: auto;
-            }
-
-            input, select {
-                margin: auto;
-                display: inline-block;
-                width: 10em;
-            }
-
-
-            #add_product {
-                padding-top: 1em;
-                display: grid;
-                grid-template-columns: 12em 10em;
-                row-gap: 0.6em;
-            }
-
-            #submit_product {
-                margin: auto;
-                width: 6em;
-                grid-column: span 2;
-            }
-
-            #delete_product select, #delete_product input {
-                margin-top: 0.8em;
-                margin-bottom: 0.8em;
-                text-align: center;
-                display: block;
-                width: 20em;
-            }
-
-            th { text-align: left; }
-
-            #blank_cell {
-                text-align: center;
-            }
-
-            table, th, td, fieldset {
-            border: 2px solid grey;
-            border-collapse: collapse;
-            }
-
-            section {
-                margin: auto;
-                width: 23.8em;
-            }
-
-            th, td {
-            padding: 0.2em;
-            }
-
-        </style>
+        <link rel="stylesheet" href="style.css" type="text/css">
 
         <script>
             function showOptions(element) {
@@ -112,7 +54,7 @@
         </table>
 
         <h2>Current Stocktake Products</h2>
-        <table>
+        <table class="current">
             <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
             <?php
 
@@ -157,7 +99,7 @@
             ?>
         </table>
 
-        <section>
+        <section class="admin_section">
             <h2>Add a new Product.</h2>
             <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
                 <fieldset id="add_product">
@@ -178,7 +120,7 @@
                     <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
                     <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
                     <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
-                    <label for="dq">Desired Quantity (1-1000):</label><input type="number" id="dq" name="dq" min="1" max="1000" required>
+                    <label for="dq">Desired Quantity:</label><input type="number" id="dq" name="dq" min="1" max="1000" placeholder="(1-1000)"required>
                     <input type="submit" value="Submit" id="submit_product">
                 </fieldset>
             </form>

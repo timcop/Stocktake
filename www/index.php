@@ -3,65 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Database test page</title>
-        <style>
-
-            table {
-                margin: auto;
-            }
-
-            h1, h2, p {
-                text-align: center;
-            }
-
-            #blank_cell {
-                text-align: center;
-            }
-
-            fieldset {
-                width: 60%;
-                margin: auto;
-            }
-
-            #stocktake {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-            }
-
-            #stocktake p:nth-child(-n+4) {
-                border: 1px solid;
-            }
-
-            #stocktake p + input {
-                height: 1em;
-                width: 8em;
-                margin: auto;
-            }
-
-            #submit_stocktake {
-                margin: auto;
-                width: 10em;
-                grid-column: span 4;
-            }
-
-            th { 
-                text-align: left; 
-            }
-
-            table, th, td, fieldset {
-            border: 2px solid grey;
-            border-collapse: collapse;
-            }
-
-            th, td {
-                padding: 0.2em;
-            }
-
-            form { 
-                margin: auto;
-                text-align: center;
-            }
-
-        </style>
+        <link rel="stylesheet" href="style.css" type="text/css">
     </head>
 
     <body>
@@ -70,7 +12,7 @@
         <p>Welcome to the stocktaking site!</p>
         <section>
         <h2>Current Products</h2>
-            <table>
+            <table class="current">
                 <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Desired Quantity</th></tr>
                 <?php
 
@@ -113,7 +55,7 @@
                     <p>Product Name</p>
                     <p>Product Type</p>
                     <p>Desired Quantity</p>
-                    <p>Current Quantity (0-1000)</p>
+                    <p>Current Quantity</p>
                     <?php
                         
                     $db_host   = '127.0.0.1';
@@ -133,9 +75,9 @@
                               <p>" . $row["type"] . "</p>\n
                               <p>" . $row["desired_quantity"] . "</p>\n";
                         if($row["unit"] == "each") {
-                            echo "<input type='number' min='0' max='1000' name='curr_count[]' required>\n";
+                            echo "<input type='number' min='0' max='1000' name='curr_count[]' placeholder='(0-1000)' required>\n";
                         } else {
-                            echo "<input type='number' min='0' name='curr_count[]' step='any' required>\n";
+                            echo "<input type='number' min='0' max='1000' name='curr_count[]' step='any' placeholder='(0.0-1000.0)'' required>\n";
                         }
                     }
                     ?>
