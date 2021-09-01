@@ -131,8 +131,12 @@
                         $product_num++;
                         echo "<p>" . $row["name"] . "</p>\n
                               <p>" . $row["type"] . "</p>\n
-                              <p>" . $row["desired_quantity"] . "</p>\n
-                              <input type='number' min='0' max='1000' name='curr_count[]' required>\n";
+                              <p>" . $row["desired_quantity"] . "</p>\n";
+                        if($row["unit"] == "each") {
+                            echo "<input type='number' min='0' max='1000' name='curr_count[]' required>\n";
+                        } else {
+                            echo "<input type='number' min='0' name='curr_count[]' step='any' required>\n";
+                        }
                     }
                     ?>
                     <input id="submit_stocktake" type="submit" value="Submit Stocktake">

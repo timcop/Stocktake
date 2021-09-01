@@ -43,7 +43,11 @@
     $q = $pdo->query("SELECT * FROM Products");
     $count = 0;
     while ($row = $q->fetch()) {
-        $sql = "INSERT INTO StocktakeProds (name, type, desired_quantity, current_quantity, stocktake_num) VALUES ('$row[name]', '$row[type]', $row[desired_quantity], $curr_counts[$count], $stock_num)";
+        if ($row["unit"] == "each") {
+            $sql = "INSERT INTO StocktakeProds (name, type, desired_quantity, current_quantityInt, stocktake_num) VALUES ('$row[name]', '$row[type]', $row[desired_quantity], $curr_counts[$count], $stock_num)";
+        } else {
+            $sql = "INSERT INTO StocktakeProds (name, type, desired_quantity, current_quantityDec, stocktake_num) VALUES ('$row[name]', '$row[type]', $row[desired_quantity], $curr_counts[$count], $stock_num)";
+        }
         $pdo->exec($sql);
         $count++;
     }
@@ -51,6 +55,8 @@
     ### Add the reference to stocktake_refs
     date_default_timezone_set('Pacific/Auckland');
     $date = date('y-n-d H:i:s');
+    // echo $date;
+
     $pdo->exec("INSERT INTO StocktakeRefs VALUES ('$date', $stock_num)");
 
     echo "<script>location.href='../.'</script>";

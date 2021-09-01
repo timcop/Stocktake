@@ -38,7 +38,7 @@
 
                 $stock_num = $_REQUEST['id'];
                 $q = $pdo->query("SELECT * FROM StocktakeProds WHERE stocktake_num=$stock_num");
-
+    
                 while ($row = $q->fetch()) {
                     echo '<tr><td>';
                     echo $row['name'];
@@ -47,7 +47,11 @@
                     echo '</td><td>';
                     echo $row['desired_quantity'];
                     echo '</td><td>';
-                    echo $row['current_quantity'];
+                    if ($row["current_quantityInt"] == NULL) {
+                        echo $row["current_quantityDec"];
+                    } else {
+                        echo $row["current_quantityInt"];
+                    }
                     echo '</td><td>';
                     echo $row['stocktake_num'];
                     echo '</td><td>';
