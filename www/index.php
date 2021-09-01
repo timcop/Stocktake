@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Database test page</title>
+        <title>Stocktake App</title>
         <link rel="stylesheet" href="style.css" type="text/css">
         <script>
             function calculateVolume(element) {
@@ -38,9 +38,9 @@
     </head>
 
     <body>
-        <h1>Database test page</h1>
+        <h1>Stocktake App</h1>
 
-        <p>Welcome to the stocktaking site!</p>
+        <p>Welcome to the stocktaking app for [insert your bar name here]!</p>
         <section>
         <h2>Current Products</h2>
             <table class="current">
@@ -119,7 +119,7 @@
         <section>
             <h2>Calculator to convert weight into volume!</h2>
             <form>
-                <fieldset>
+                <fieldset id="calculator">
                     <select name="product" id="converter">
                         <?php
                             $db_host   = '127.0.0.1';

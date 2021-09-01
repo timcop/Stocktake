@@ -20,7 +20,17 @@ h1, h2, p {
     text-align: center;
 }
 
+#prev_stocktakes td, #prev_stocktakes th {
+    text-align: center;
+}
+
+#calculator {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
 #vol_calc {
+    padding-top: 1em;
     display: none;
 }
 

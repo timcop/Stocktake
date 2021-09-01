@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Admin Database test page</title>
+        <title>Stocktake App Admin Page</title>
         <link rel="stylesheet" href="style.css" type="text/css">
 
         <script>
@@ -21,12 +21,14 @@
     </head>
 
     <body>
-        <h1>Welcome to the admin website for super bartenders.</h1>
+        <h1>Stocktake App Admin Page</h1>
+
+        <p>Welcome to the Admin page for Super Bartenders.</p>
 
         <h2>Previous Stocktakes:</h2>
 
-        <table>
-            <tr><th>Date</th><th>StocktakeID</th><th>Go to stocktake</th></tr>
+        <table id="prev_stocktakes">
+            <tr><th>Date</th><th>Stocktake ID #</th><th>Go to stocktake</th></tr>
 
             <?php
             
