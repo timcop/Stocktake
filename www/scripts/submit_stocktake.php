@@ -51,9 +51,9 @@
     ### Add the reference to stocktake_refs
     date_default_timezone_set('Pacific/Auckland');
     $date = date('y-n-d H:i:s');
-    echo $date;
-
     $pdo->exec("INSERT INTO StocktakeRefs VALUES ('$date', $stock_num)");
+
+    echo "<script>location.href='../.'</script>";
 
 ?>
 

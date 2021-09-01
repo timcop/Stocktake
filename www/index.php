@@ -17,9 +17,12 @@
                 text-align: center;
             }
 
-            #stocktake {
-                margin: auto;
+            fieldset {
                 width: 60%;
+                margin: auto;
+            }
+
+            #stocktake {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
             }
@@ -90,7 +93,7 @@
                     echo '</td><td>';
                     echo $row["unit"];
                     echo '</td>';
-                    if ($row['volume'] > 0) {
+                    if ($row['vol'] != NULL) {
                         echo '<td>' . $row["vol"];
                     } else {
                         echo "<td id='blank_cell'>-";
