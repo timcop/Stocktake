@@ -59,6 +59,8 @@
 
     $pdo->exec("INSERT INTO StocktakeRefs VALUES ('$date', $stock_num)");
 
+    echo "<script>location.href='../.'</script>";
+
 ?>
 
 

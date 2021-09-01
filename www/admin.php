@@ -42,6 +42,10 @@
 
             th { text-align: left; }
 
+            #blank_cell {
+                text-align: center;
+            }
+
             table, th, td, fieldset {
             border: 2px solid grey;
             border-collapse: collapse;
@@ -57,6 +61,21 @@
             }
 
         </style>
+
+        <script>
+            function showOptions(element) {
+                var selectedValue = element.options[element.selectedIndex].value;
+                if (selectedValue == "each") {
+                    document.querySelectorAll('.liquid').forEach(function(element) {
+                    element.style.display = "none";
+                });
+                } else {
+                    document.querySelectorAll('.liquid').forEach(function(element) {
+                    element.style.display = "inline-block";
+                });
+                }
+            }
+        </script>
     </head>
 
     <body>
@@ -109,33 +128,30 @@
                 $q = $pdo->query("SELECT * FROM Products");
 
                 while($row = $q->fetch()){
-                    echo '<tr><td>';
-                    echo $row["name"];
+                echo '<tr><td>';
+                echo $row["name"];
+                echo '</td><td>';
+                echo $row["type"];
+                echo '</td><td>';
+                echo $row["unit"];
+                echo '</td>';
+                if ($row["unit"] == "ml") {
+                    echo '<td>' . $row["vol"];
                     echo '</td><td>';
-                    echo $row["type"];
+                    echo $row["full_weight"];
                     echo '</td><td>';
-                    echo $row["unit"];
+                    echo $row["empty_weight"];
                     echo '</td><td>';
-                    if ($row['vol'] == NULL) {
-                        echo "-";
-                    } else {
-                        echo $row["vol"];
-                    }
+                } else {
+                    echo '<td id="blank_cell">-';
+                    echo '</td><td id="blank_cell">';
+                    echo '-';
+                    echo '</td><td id="blank_cell">';
+                    echo '-';
                     echo '</td><td>';
-                    if ($row['full_weight'] == NULL) {
-                        echo "-";
-                    } else {
-                        echo $row["full_weight"];
-                    }
-                    echo '</td><td>';
-                    if ($row['empty_weight'] == NULL) {
-                        echo "-";
-                    } else {
-                        echo $row["empty_weight"];
-                    }
-                    echo '</td><td>';
-                    echo $row["desired_quantity"];
-                    echo '</td></tr>';
+                }
+                echo $row["desired_quantity"];
+                echo '</td></tr>';
                 }
                 
             ?>
@@ -154,14 +170,14 @@
                         <option value="Misc">Misc</option>
                     </select>
                     <label for="unit">Unit: </label>
-                    <select name="unit" id ="unit">
+                    <select name="unit" id ="unit" onchange="showOptions(this)">
                         <option value="ml">ml</option>
                         <option value="L">L</option>
                         <option value="each">each</option>
                     </select>
-                    <label for="volume">Volume: </label><input type="number" placeholder="Volume" id="volume" name="volume" min="0">
-                    <label for="full_weight">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" name="full_weight" min="0">
-                    <label for="empty_weight">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" name="empty_weight" min="0">
+                    <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
+                    <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
+                    <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
                     <label for="dq">Desired Quantity (1-1000):</label><input type="number" id="dq" name="dq" min="1" max="1000" required>
                     <input type="submit" value="Submit" id="submit_product">
                 </fieldset>

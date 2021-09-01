@@ -13,6 +13,15 @@
                 text-align: center;
             }
 
+            #blank_cell {
+                text-align: center;
+            }
+
+            fieldset {
+                width: 60%;
+                margin: auto;
+            }
+
             #stocktake {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -20,6 +29,12 @@
 
             #stocktake p:nth-child(-n+4) {
                 border: 1px solid;
+            }
+
+            #stocktake p + input {
+                height: 1em;
+                width: 8em;
+                margin: auto;
             }
 
             #submit_stocktake {
@@ -56,7 +71,7 @@
         <section>
         <h2>Current Products</h2>
             <table>
-                <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
+                <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Desired Quantity</th></tr>
                 <?php
 
                     $db_host   = '127.0.0.1';
@@ -71,33 +86,21 @@
                     $q = $pdo->query("SELECT * FROM Products");
 
                     while($row = $q->fetch()){
-                        echo '<tr><td>';
-                        echo $row["name"];
-                        echo '</td><td>';
-                        echo $row["type"];
-                        echo '</td><td>';
-                        echo $row["unit"];
-                        echo '</td><td>';
-                        if ($row['vol'] == NULL) {
-                            echo "-";
-                        } else {
-                            echo $row["vol"];
-                        }
-                        echo '</td><td>';
-                        if ($row['full_weight'] == NULL) {
-                            echo "-";
-                        } else {
-                            echo $row["full_weight"];
-                        }
-                        echo '</td><td>';
-                        if ($row['empty_weight'] == NULL) {
-                            echo "-";
-                        } else {
-                            echo $row["empty_weight"];
-                        }
-                        echo '</td><td>';
-                        echo $row["desired_quantity"];
-                        echo '</td></tr>';
+                    echo '<tr><td>';
+                    echo $row["name"];
+                    echo '</td><td>';
+                    echo $row["type"];
+                    echo '</td><td>';
+                    echo $row["unit"];
+                    echo '</td>';
+                    if ($row['vol'] != NULL) {
+                        echo '<td>' . $row["vol"];
+                    } else {
+                        echo "<td id='blank_cell'>-";
+                    }
+                    echo '</td><td>';
+                    echo $row["desired_quantity"];
+                    echo '</td></tr>';
                     }
                     
                 ?>
@@ -130,7 +133,7 @@
                               <p>" . $row["type"] . "</p>\n
                               <p>" . $row["desired_quantity"] . "</p>\n";
                         if($row["unit"] == "each") {
-                            echo "<input type='number' min='0' name='curr_count[]' required>\n";
+                            echo "<input type='number' min='0' max='1000' name='curr_count[]' required>\n";
                         } else {
                             echo "<input type='number' min='0' name='curr_count[]' step='any' required>\n";
                         }
