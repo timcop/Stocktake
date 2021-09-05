@@ -47,7 +47,7 @@
                     // Set vol calc to what we want.
                     document.querySelectorAll('#vol_calc').forEach(function(element) {
                         element.innerHTML = round(current_volume).toString() + unit + ", or " 
-                        + percentage + "% of 1 bottle.";
+                        + current_weight_ratio + " of 1 bottle.";
                         element.style.display = "block";
                     });
                 }
