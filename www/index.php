@@ -153,7 +153,7 @@
                             $q = $pdo->query($sql);
 
                             while ($row = $q->fetch()) {
-                                if ($row['unit'] != 'each') {
+                                if ($row['unit'] != 'each' && $row['empty_weight'] != NULL && $row['full_weight'] != NULL) {
                                     echo "<option value='" . $row['unit'] . " " .
                                                              $row['empty_weight'] . " " .
                                                             $row['full_weight'] . " " .

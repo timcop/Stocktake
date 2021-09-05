@@ -12,6 +12,9 @@
     $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
     $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+    // $sel = "SELECT FROM Products WHERE name='$product_name' AND type='$product_type' AND desired_quantity=$desired_quantity";
+    // $q = $pdo->query($sel);
+
     $sql = "DELETE FROM Products WHERE name='$product_name' AND type='$product_type' AND desired_quantity=$desired_quantity";
     $pdo->exec($sql);
 
