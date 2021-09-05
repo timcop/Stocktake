@@ -5,14 +5,17 @@
         <title>Stocktake App</title>
         <link rel="stylesheet" href="style.css" type="text/css">
         <script>
+            function round(num) {
+                var m = Number((Math.abs(num) * 100).toPrecision(15));
+                return Math.round(m) / 100 * Math.sign(num);
+            }
+
             function calculateVolume(element) {
                 var values = document.getElementById('converter').selectedOptions[0].value
 
                 var current_weight = document.getElementById('current_weight').value;
-                console.log(current_weight);
-                var current_int = parseInt(current_weight);
-
-                if (Number.isNaN(current_int)) {
+                current_weight = parseFloat(current_weight);
+                if (Number.isNaN(current_weight)) {
                     document.querySelectorAll('#vol_calc').forEach(function(element) {
                         element.innerHTML = "Please enter a current weight.";
                         element.style.display = "block";
@@ -20,15 +23,23 @@
                 } else {
                     // Everything is still a string.
                     var vol_array = values.split(" ");
+                    console.log(vol_array);
                     var unit = vol_array[0];
                     var empty_weight = vol_array[1];
-                    var full_vol = vol_array[2];
-                    var vol = current_int - parseInt(empty_weight);
-                    var percentage = vol / full_vol;
-                    percentage = Math.round(percentage*100);
+                    var full_weight = vol_array[2];
+                    var full_vol = vol_array[3];
+
+                    var fluid_weight = full_weight-empty_weight;
+                    var current_weight_ratio = (current_weight-empty_weight)/fluid_weight;
+                    console.log(current_weight_ratio);
+                    var current_volume = current_weight_ratio*full_vol;
+                    console.log(current_volume);
+                    var percentage = round(current_weight_ratio*100);
+
+
                     // Set vol calc to what we want.
                     document.querySelectorAll('#vol_calc').forEach(function(element) {
-                        element.innerHTML = vol.toString() + unit + ", or " 
+                        element.innerHTML = round(current_volume).toString() + unit + ", or " 
                         + percentage + "% of 1 bottle.";
                         element.style.display = "block";
                     });
@@ -138,6 +149,7 @@
                                 if ($row['unit'] != 'each') {
                                     echo "<option value='" . $row['unit'] . " " .
                                                              $row['empty_weight'] . " " .
+                                                            $row['full_weight'] . " " .
                                                              $row['vol'] . 
                                         "'>" . $row['name'] . "</option>\n";
                                 }
