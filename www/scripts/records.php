@@ -33,7 +33,11 @@
                 echo '</td><td>';
                 echo $row['desired_quantity'];
                 echo '</td><td>';
-                echo $row["current_quantity"];
+                if ($row["current_quantityInt"] == NULL) {
+                    echo $row["current_quantityDec"];
+                } else {
+                    echo $row["current_quantityInt"];
+                }
                 echo '</td></tr>';
             }
             echo "</table>\n";
