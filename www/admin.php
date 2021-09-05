@@ -56,51 +56,118 @@
         </table>
 
         <h2>Current Stocktake Products</h2>
-        <table class="current">
-            <tr><th>Product Name</th><th>Product Type</th><th>Unit</th><th>Volume</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
-            <?php
+            <h3> Spirits </h3>
+                <table class="current">
+                    <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
+                    <?php
 
-                $db_host   = '127.0.0.1';
-                $db_name   = 'stocktake';
-                $db_user   = 'root';
-                $db_passwd = 'insecure_mysqlroot_pw';
+                        $db_host   = '127.0.0.1';
+                        $db_name   = 'stocktake';
+                        $db_user   = 'root';
+                        $db_passwd = 'insecure_mysqlroot_pw';
 
-                $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
-                $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-                $q = $pdo->query("SELECT * FROM Products");
+                        $q = $pdo->query("SELECT * FROM Spirits");
 
-                while($row = $q->fetch()){
-                echo '<tr><td>';
-                echo $row["name"];
-                echo '</td><td>';
-                echo $row["type"];
-                echo '</td><td>';
-                echo $row["unit"];
-                echo '</td>';
-                if ($row["unit"] == "ml") {
-                    echo '<td>' . $row["vol"];
-                    echo '</td><td>';
-                    echo $row["full_weight"];
-                    echo '</td><td>';
-                    echo $row["empty_weight"];
-                    echo '</td><td>';
-                } else {
-                    echo '<td id="blank_cell">-';
-                    echo '</td><td id="blank_cell">';
-                    echo '-';
-                    echo '</td><td id="blank_cell">';
-                    echo '-';
-                    echo '</td><td>';
-                }
-                echo $row["desired_quantity"];
-                echo '</td></tr>';
-                }
-                
-            ?>
-        </table>
+                        while($row = $q->fetch()){
+                            echo '<tr><td>';
+                            echo $row["name"];
+                            echo '</td><td>';
+                            echo $row["volume"];
+                            echo '</td><td>';
+                            echo $row["full_weight"];
+                            echo '</td><td>';
+                            echo $row["empty_weight"];
+                            echo '</td><td>';
+                            echo $row["desired_quantity"];
+                            echo '</td></tr>';
+                        }  
+                    ?>
+                </table>
+                <h3> Wine </h3>
+                <table class="current">
+                    <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
+                    <?php
 
+                        $db_host   = '127.0.0.1';
+                        $db_name   = 'stocktake';
+                        $db_user   = 'root';
+                        $db_passwd = 'insecure_mysqlroot_pw';
+
+                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+
+                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+
+                        $q = $pdo->query("SELECT * FROM Wine");
+
+                        while($row = $q->fetch()){
+                            echo '<tr><td>';
+                            echo $row["name"];
+                            echo '</td><td>';
+                            echo $row["volume"];
+                            echo '</td><td>';
+                            echo $row["full_weight"];
+                            echo '</td><td>';
+                            echo $row["empty_weight"];
+                            echo '</td><td>';
+                            echo $row["desired_quantity"];
+                            echo '</td></tr>';
+                        }  
+                    ?>
+                </table>
+                <h3> Beer </h3>
+                <table class="current">
+                    <tr><th>Product Name</th><th>Desired Quantity</th></tr>
+                    <?php
+
+                        $db_host   = '127.0.0.1';
+                        $db_name   = 'stocktake';
+                        $db_user   = 'root';
+                        $db_passwd = 'insecure_mysqlroot_pw';
+
+                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+
+                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+
+                        $q = $pdo->query("SELECT * FROM Beer");
+
+                        while($row = $q->fetch()){
+                            echo '<tr><td>';
+                            echo $row["name"];
+                            echo '</td><td>';
+                            echo $row["desired_quantity"];
+                            echo '</td></tr>';
+                        }  
+                    ?>
+                </table>
+                <h3> Non-Alcholic </h3>
+                <table class="current">
+                    <tr><th>Product Name</th><th>Desired Quantity</th></tr>
+                    <?php
+
+                        $db_host   = '127.0.0.1';
+                        $db_name   = 'stocktake';
+                        $db_user   = 'root';
+                        $db_passwd = 'insecure_mysqlroot_pw';
+
+                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+
+                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+
+                        $q = $pdo->query("SELECT * FROM NonAlc");
+
+                        while($row = $q->fetch()){
+                            echo '<tr><td>';
+                            echo $row["name"];
+                            echo '</td><td>';
+                            echo $row["desired_quantity"];
+                            echo '</td></tr>';
+                        }  
+                    ?>
+                </table>
         <section class="admin_section">
             <h2>Add a new Product.</h2>
             <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
@@ -109,16 +176,16 @@
                     <label for="type">Product Type: </label>
                     <select name="type" id="type">
                         <option value="Spirit">Spirit</option>
+                        <option value="Wine">Wine</option>
                         <option value="Beer">Beer</option>
-                        <option value="Mixers">Mixers</option>
-                        <option value="Misc">Misc</option>
+                        <option value="NonAlc">NonAlc</option>
                     </select>
-                    <label for="unit">Unit: </label>
+                    <!-- <label for="unit">Unit: </label>
                     <select name="unit" id ="unit" onchange="showOptions(this)">
                         <option value="ml">ml</option>
                         <option value="L">L</option>
                         <option value="each">each</option>
-                    </select>
+                    </select> -->
                     <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
                     <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
                     <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
@@ -142,7 +209,11 @@
 
                             $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-                            $q = $pdo->query("SELECT * FROM Products");
+                            $sql = "SELECT name, desired_quantity FROM Spirits
+                             UNION SELECT name, desired_quantity FROM Wine
+                             UNION SELECT * FROM Beer
+                             UNION SELECT * FROM NonAlc";
+                            $q = $pdo->query($sql);
 
                             while($row = $q->fetch()){
                             echo "<option value='" . $row["name"] . "|" . $row["type"] . "|" . $row["desired_quantity"] . "'>" 

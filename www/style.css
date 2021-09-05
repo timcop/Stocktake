@@ -1,5 +1,5 @@
 body {
-    background-color: #eb9019;
+    background-color: #e78d16;
 }
 
 table {
@@ -8,15 +8,15 @@ table {
 }
 
 /* Font theme */
-h1, h2, p, th, td, label, input, select{
+h1, h2, h3,p, th, td, label, input, select{
     font-family: "Helvetica", Sans-serif;
 }
 
-h1, h2, p, th, td, label {
+h1, h2, h3, p, th, td, label {
     color: #F0F3F6;
 }
 
-h1, h2, p {
+h1, h2, h3, p {
     text-align: center;
 }
 
