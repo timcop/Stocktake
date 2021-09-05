@@ -15,25 +15,32 @@
 
                 var current_weight = document.getElementById('current_weight').value;
                 current_weight = parseFloat(current_weight);
+                var vol_array = values.split(" ");
+                var unit = vol_array[0];
+                var empty_weight = vol_array[1];
+                var full_weight = vol_array[2];
+
                 if (Number.isNaN(current_weight)) {
                     document.querySelectorAll('#vol_calc').forEach(function(element) {
                         element.innerHTML = "Please enter a current weight.";
                         element.style.display = "block";
                     });
+                } else if (current_weight < empty_weight || current_weight > full_weight) {
+                    document.querySelectorAll('#vol_calc').forEach(function(element) {
+                        element.innerHTML = round(current_volume).toString() + unit + ", or " 
+                        + percentage + "% of 1 bottle.";
+                        element.style.display = "block";
+
+                        element.innerHTML = "INVALID WEIGHT: Please enter a weight between Empty Weight: " + empty_weight.toString()
+                        + "g and Full Weight: " + full_weight.toString() + "g";
+                    });
                 } else {
                     // Everything is still a string.
-                    var vol_array = values.split(" ");
-                    console.log(vol_array);
-                    var unit = vol_array[0];
-                    var empty_weight = vol_array[1];
-                    var full_weight = vol_array[2];
+                    
                     var full_vol = vol_array[3];
-
                     var fluid_weight = full_weight-empty_weight;
                     var current_weight_ratio = (current_weight-empty_weight)/fluid_weight;
-                    console.log(current_weight_ratio);
                     var current_volume = current_weight_ratio*full_vol;
-                    console.log(current_volume);
                     var percentage = round(current_weight_ratio*100);
 
 
