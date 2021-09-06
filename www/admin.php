@@ -138,58 +138,62 @@
                     </table>
                 </div>
         <section class="admin_section">
-            <h2>Add a new Product.</h2>
-            <!-- A form to insert a product, this is sent to insert_product.php with the inputs-->
-            <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
-                <fieldset id="add_product">
-                    <p id=required_text>* Required Information</p>
-                    <label for="name">Name of Product*: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
-                    <label for="type">Product Type*: </label>
-                    <select name="category" id="category">
-                        <option value="Spirits">Spirits</option>
-                        <option value="Wine">Wine</option>
-                        <option value="Beer">Beer</option>
-                        <option value="NonAlc">NonAlc</option>
-                    </select>
-                    <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
-                    <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
-                    <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
-                    <label for="dq">Desired Quantity*:</label><input type="number" id="dq" name="dq" min="1" max="1000" placeholder="(1-1000)"required>
-                    <input type="submit" value="Submit" id="submit_product">
-                </fieldset>
-            </form>
-            
-            <h2>Delete a Product</h2>
-            <!-- A form to delete a product, this is sent to delete_product.php with the inputs-->
-            <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/delete_product.php">
-                <fieldset id="delete_product">
-                    <select name="product" id="name">
-                        <?php
-                            ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
-                            $db_host   = '127.0.0.1';
-                            $db_name   = 'stocktake';
-                            $db_user   = 'root';
-                            $db_passwd = 'insecure_mysqlroot_pw';
-                            $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                            $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+            <div>
+                <h2>Add a new Product</h2>
+                <!-- A form to insert a product, this is sent to insert_product.php with the inputs-->
+                <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
+                    <fieldset id="add_product">
+                        <p id=required_text>* Required Information</p>
+                        <label for="name">Name of Product*: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
+                        <label for="type">Product Type*: </label>
+                        <select name="category" id="category">
+                            <option value="Spirits">Spirits</option>
+                            <option value="Wine">Wine</option>
+                            <option value="Beer">Beer</option>
+                            <option value="NonAlc">NonAlc</option>
+                        </select>
+                        <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
+                        <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
+                        <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
+                        <label for="dq">Desired Quantity*:</label><input type="number" id="dq" name="dq" min="1" max="1000" placeholder="(1-1000)"required>
+                        <input type="submit" value="Submit" id="submit_product">
+                    </fieldset>
+                </form>
+            </div>
 
-                            # Union all the tables selecting just name and desired_quantity 
-                            $sql = "SELECT name, desired_quantity FROM Spirits
-                             UNION SELECT name, desired_quantity FROM Wine
-                             UNION SELECT name, desired_quantity FROM Beer
-                             UNION SELECT name, desired_quantity FROM NonAlc";
-                            $q = $pdo->query($sql);
+            <div>
+                <h2>Delete a Product</h2>
+                <!-- A form to delete a product, this is sent to delete_product.php with the inputs-->
+                <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/delete_product.php">
+                    <fieldset id="delete_product">
+                        <select name="product" id="name">
+                            <?php
+                                ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
+                                $db_host   = '127.0.0.1';
+                                $db_name   = 'stocktake';
+                                $db_user   = 'root';
+                                $db_passwd = 'insecure_mysqlroot_pw';
+                                $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+                                $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-                            # Display the records which can be selected 
-                            while($row = $q->fetch()){
-                            echo "<option value='" . $row["name"] . "|" . $row["desired_quantity"] . "'>" 
-                            . $row["name"] . ", " . $row["desired_quantity"] . "</option>";
-                            }
-                        ?>
-                    </select>
-                    <input type="submit" value="Delete">
-                </fieldset>
-            </form>
+                                # Union all the tables selecting just name and desired_quantity 
+                                $sql = "SELECT name, desired_quantity FROM Spirits
+                                UNION SELECT name, desired_quantity FROM Wine
+                                UNION SELECT name, desired_quantity FROM Beer
+                                UNION SELECT name, desired_quantity FROM NonAlc";
+                                $q = $pdo->query($sql);
+
+                                # Display the records which can be selected 
+                                while($row = $q->fetch()){
+                                echo "<option value='" . $row["name"] . "|" . $row["desired_quantity"] . "'>" 
+                                . $row["name"] . ", " . $row["desired_quantity"] . "</option>";
+                                }
+                            ?>
+                        </select>
+                        <input type="submit" value="Delete">
+                    </fieldset>
+                </form>
+            </div>
         </section>
     </body>
 </html>
