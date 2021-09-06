@@ -31,18 +31,18 @@
             <tr><th>Date</th><th>Stocktake ID #</th><th>Go to stocktake</th></tr>
 
             <?php
-            
+                ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
                 $db_host   = '127.0.0.1';
                 $db_name   = 'stocktake';
                 $db_user   = 'root';
                 $db_passwd = 'insecure_mysqlroot_pw';
-
                 $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
                 $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
+                # Grab all the Stocktake reference records
                 $q = $pdo->query("SELECT * FROM StocktakeRefs");
 
+                # Display each record
                 while($row = $q->fetch()){
                 echo '<tr><td>';
                 echo $row['dt'];
@@ -51,7 +51,6 @@
                 echo '<td><a href="scripts/records.php?id='.$row['stock_num'].'"><input type="submit" name="submit" 
                 value="Open" class="Register" /></a></td>';
                 }
-                
             ?>
         </table>
 
@@ -60,18 +59,18 @@
                 <table class="current">
                     <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
                     <?php
-
+                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
                         $db_host   = '127.0.0.1';
                         $db_name   = 'stocktake';
                         $db_user   = 'root';
                         $db_passwd = 'insecure_mysqlroot_pw';
-
                         $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
                         $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
+                        # Grab all records in Spirits table
                         $q = $pdo->query("SELECT * FROM Spirits");
 
+                        # Display them
                         while($row = $q->fetch()){
                             echo '<tr><td>';
                             echo $row["name"];
@@ -91,18 +90,18 @@
                 <table class="current">
                     <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
                     <?php
-
+                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
                         $db_host   = '127.0.0.1';
                         $db_name   = 'stocktake';
                         $db_user   = 'root';
                         $db_passwd = 'insecure_mysqlroot_pw';
-
                         $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
                         $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-
+                        
+                        # Grab all records in Wine table
                         $q = $pdo->query("SELECT * FROM Wine");
 
+                        # Display them
                         while($row = $q->fetch()){
                             echo '<tr><td>';
                             echo $row["name"];
@@ -122,18 +121,18 @@
                 <table class="current">
                     <tr><th>Product Name</th><th>Desired Quantity</th></tr>
                     <?php
-
+                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
                         $db_host   = '127.0.0.1';
                         $db_name   = 'stocktake';
                         $db_user   = 'root';
                         $db_passwd = 'insecure_mysqlroot_pw';
-
                         $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
                         $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
+                        # Grab all records in Beer table
                         $q = $pdo->query("SELECT * FROM Beer");
 
+                        # Display them
                         while($row = $q->fetch()){
                             echo '<tr><td>';
                             echo $row["name"];
@@ -147,18 +146,18 @@
                 <table class="current">
                     <tr><th>Product Name</th><th>Desired Quantity</th></tr>
                     <?php
-
+                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
                         $db_host   = '127.0.0.1';
                         $db_name   = 'stocktake';
                         $db_user   = 'root';
                         $db_passwd = 'insecure_mysqlroot_pw';
-
                         $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
                         $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-
+                        
+                        # Grab all records in NonAlc table
                         $q = $pdo->query("SELECT * FROM NonAlc");
 
+                        # Display them
                         while($row = $q->fetch()){
                             echo '<tr><td>';
                             echo $row["name"];
@@ -168,8 +167,10 @@
                         }  
                     ?>
                 </table>
+
         <section class="admin_section">
             <h2>Add a new Product.</h2>
+            <!-- A form to insert a product, this is sent to insert_product.php with the inputs-->
             <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
                 <fieldset id="add_product">
                     <label for="name">Name of Product: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
@@ -180,12 +181,6 @@
                         <option value="Beer">Beer</option>
                         <option value="NonAlc">NonAlc</option>
                     </select>
-                    <!-- <label for="unit">Unit: </label>
-                    <select name="unit" id ="unit" onchange="showOptions(this)">
-                        <option value="ml">ml</option>
-                        <option value="L">L</option>
-                        <option value="each">each</option>
-                    </select> -->
                     <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
                     <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
                     <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
@@ -195,26 +190,27 @@
             </form>
             
             <h2>Delete a Product</h2>
+            <!-- A form to delete a product, this is sent to delete_product.php with the inputs-->
             <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/delete_product.php">
                 <fieldset id="delete_product">
                     <select name="product" id="name">
                         <?php
-                        
+                            ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
                             $db_host   = '127.0.0.1';
                             $db_name   = 'stocktake';
                             $db_user   = 'root';
                             $db_passwd = 'insecure_mysqlroot_pw';
-
                             $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
                             $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
+                            # Union all the tables selecting just name and desired_quantity 
                             $sql = "SELECT name, desired_quantity FROM Spirits
                              UNION SELECT name, desired_quantity FROM Wine
                              UNION SELECT name, desired_quantity FROM Beer
                              UNION SELECT name, desired_quantity FROM NonAlc";
                             $q = $pdo->query($sql);
 
+                            # Display the records which can be selected 
                             while($row = $q->fetch()){
                             echo "<option value='" . $row["name"] . "|" . $row["desired_quantity"] . "'>" 
                             . $row["name"] . ", " . $row["desired_quantity"] . "</option>";

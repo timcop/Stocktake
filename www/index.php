@@ -5,16 +5,19 @@
         <title>Stocktake App</title>
         <link rel="stylesheet" href="style.css" type="text/css">
         <script>
+
+            // Returns a rounded number to 2 decimal places
             function round(num) {
                 var m = Number((Math.abs(num) * 100).toPrecision(15));
                 return Math.round(m) / 100 * Math.sign(num);
             }
 
+            // Calculates the current volume of a bottle and displays it for the user 
             function calculateVolume(element) {
-                var values = document.getElementById('converter').selectedOptions[0].value
 
+                var values = document.getElementById('converter').selectedOptions[0].value
                 var current_weight = document.getElementById('current_weight').value;
-                current_weight = parseFloat(current_weight);
+                current_weight = parseFloat(current_weight); 
                 var vol_array = values.split(" ");
                 var empty_weight = vol_array[0];
                 var full_weight = vol_array[1];
@@ -65,31 +68,29 @@
                     <p>Desired Quantity</p>
                     <p>Current Quantity</p>
                     <?php
-                        
-                    $db_host   = '127.0.0.1';
-                    $db_name   = 'stocktake';
-                    $db_user   = 'user';
-                    $db_passwd = 'insecure_db_pw';
+                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
+                        $db_host   = '127.0.0.1';
+                        $db_name   = 'stocktake';
+                        $db_user   = 'user';
+                        $db_passwd = 'insecure_db_pw';
+                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-                    $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
-                    $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-
-                    $tables = array("Spirits", "Wine", "Beer", "NonAlc");
-                    $tables = array("Spirits", "Wine", "Beer", "NonAlc");
-                    foreach($tables as $table) {
-                        $sql = "SELECT * FROM $table";
-                        $q = $pdo->query($sql);
-                        while($row = $q->fetch()){
-                            echo "<p>" . $row["name"] . "</p>\n
-                                  <p>" . $row["desired_quantity"] . "</p>\n";
-                            if ($table == "Spirits" || $table == "Wine") {
-                                echo "<input type='number' min='0' max='1000' name=" . $table ."[" . $row['id'] . "] step='any' placeholder='(0.0-1000.0)'' required>\n";
-                            } else {
-                                echo "<input type='number' min='0' max='1000' name=" . $table ."[" . $row['id'] . "] step='any' placeholder='(0-1000)'' required>\n";
+                        # Loop through the tables displaying each item with current_count input as an option next to each
+                        $tables = array("Spirits", "Wine", "Beer", "NonAlc");
+                        foreach($tables as $table) {
+                            $sql = "SELECT * FROM $table";
+                            $q = $pdo->query($sql);
+                            while($row = $q->fetch()){
+                                echo "<p>" . $row["name"] . "</p>\n
+                                    <p>" . $row["desired_quantity"] . "</p>\n";
+                                if ($table == "Spirits" || $table == "Wine") {
+                                    echo "<input type='number' min='0' max='1000' name=" . $table ."[" . $row['id'] . "] step='any' placeholder='(0.0-1000.0)'' required>\n";
+                                } else {
+                                    echo "<input type='number' min='0' max='1000' name=" . $table ."[" . $row['id'] . "] step='any' placeholder='(0-1000)'' required>\n";
+                                }
                             }
                         }
-                    }
                     ?>
                     <input id="submit_stocktake" type="submit" value="Submit Stocktake">
                 </fieldset>
@@ -101,15 +102,15 @@
                 <fieldset id="calculator">
                     <select name="product" id="converter">
                         <?php
+                            ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
                             $db_host   = '127.0.0.1';
                             $db_name   = 'stocktake';
                             $db_user   = 'user';
                             $db_passwd = 'insecure_db_pw';
-        
                             $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-        
                             $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
+                            # Union spirits and wine as these are the only tables that can be used with the calculator 
                             $sql = "SELECT * FROM Spirits UNION SELECT * FROM Wine";
                             $q = $pdo->query($sql);
 
