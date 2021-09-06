@@ -35,18 +35,19 @@
     }
 
 
-
+    // print_r($_REQUEST);
     // Insert prods with their current counts 
     $tables = array("Spirits", "Wine", "Beer", "NonAlc");
     foreach ($tables as $table) {
         $values = $_REQUEST[$table];
-        foreach ($values as $id) {
+
+        foreach ($values as $id => $count) {
             $rec = $pdo->query("SELECT * FROM $table WHERE id=$id")->fetch();
             if ($table == "Spirits" || $table == "Wine") {
-                $insert = "INSERT INTO StocktakeProds (name, desired_quantity, current_quantityDec, stocktake_num) VALUES ('$rec[name]', '$rec[desired_quantity]', '$values[$id]', '$stock_num')";
+                $insert = "INSERT INTO StocktakeProds (name, desired_quantity, current_quantityDec, stocktake_num) VALUES ('$rec[name]', '$rec[desired_quantity]', '$count', '$stock_num')";
                 $pdo->exec($insert);
             } else {
-                $insert = "INSERT INTO StocktakeProds (name, desired_quantity, current_quantityInt, stocktake_num) VALUES ('$rec[name]', '$rec[desired_quantity]', '$values[$id]', '$stock_num')";
+                $insert = "INSERT INTO StocktakeProds (name, desired_quantity, current_quantityInt, stocktake_num) VALUES ('$rec[name]', '$rec[desired_quantity]', '$count', '$stock_num')";
                 $pdo->exec($insert);
             }
         }
@@ -61,7 +62,7 @@
 
     $pdo->exec("INSERT INTO StocktakeRefs VALUES ('$date', $stock_num)");
 
-    // echo "<script>location.href='../.'</script>";
+    echo "<script>location.href='../.'</script>";
 
 ?>
 
