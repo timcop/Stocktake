@@ -211,8 +211,8 @@
 
                             $sql = "SELECT name, desired_quantity FROM Spirits
                              UNION SELECT name, desired_quantity FROM Wine
-                             UNION SELECT * FROM Beer
-                             UNION SELECT * FROM NonAlc";
+                             UNION SELECT name, desired_quantity FROM Beer
+                             UNION SELECT name, desired_quantity FROM NonAlc";
                             $q = $pdo->query($sql);
 
                             while($row = $q->fetch()){
