@@ -174,8 +174,8 @@
                 <fieldset id="add_product">
                     <label for="name">Name of Product: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
                     <label for="type">Product Type: </label>
-                    <select name="type" id="type">
-                        <option value="Spirit">Spirit</option>
+                    <select name="category" id="category">
+                        <option value="Spirits">Spirits</option>
                         <option value="Wine">Wine</option>
                         <option value="Beer">Beer</option>
                         <option value="NonAlc">NonAlc</option>
