@@ -216,8 +216,8 @@
                             $q = $pdo->query($sql);
 
                             while($row = $q->fetch()){
-                            echo "<option value='" . $row["name"] . "|" . $row["type"] . "|" . $row["desired_quantity"] . "'>" 
-                            . $row["name"] . ", " . $row["type"] . ", " . $row["desired_quantity"] . "</option>";
+                            echo "<option value='" . $row["name"] . "|" . $row["desired_quantity"] . "'>" 
+                            . $row["name"] . ", " . $row["desired_quantity"] . "</option>";
                             }
                         ?>
                     </select>

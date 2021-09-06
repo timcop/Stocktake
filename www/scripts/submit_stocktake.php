@@ -17,8 +17,6 @@
         return false;
     }
 
-    $curr_counts = $_REQUEST['curr_count'];
-
     $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
     $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
@@ -36,21 +34,25 @@
         $stock_num = $max + 1;
     }
 
-    // echo $max;
-    // echo $stock_num;
-   
+
+
     // Insert prods with their current counts 
-    $q = $pdo->query("SELECT * FROM Products");
-    $count = 0;
-    while ($row = $q->fetch()) {
-        if ($row["unit"] == "each") {
-            $sql = "INSERT INTO StocktakeProds (name, type, desired_quantity, current_quantityInt, stocktake_num) VALUES ('$row[name]', '$row[type]', $row[desired_quantity], $curr_counts[$count], $stock_num)";
-        } else {
-            $sql = "INSERT INTO StocktakeProds (name, type, desired_quantity, current_quantityDec, stocktake_num) VALUES ('$row[name]', '$row[type]', $row[desired_quantity], $curr_counts[$count], $stock_num)";
+    $tables = array("Spirits", "Wine", "Beer", "NonAlc");
+    foreach ($tables as $table) {
+        $values = $_REQUEST[$table];
+        foreach ($values as $id) {
+            $rec = $pdo->query("SELECT * FROM $table WHERE id=$id")->fetch();
+            if ($table == "Spirits" || $table == "Wine") {
+                $insert = "INSERT INTO StocktakeProds (name, desired_quantity, current_quantityDec, stocktake_num) VALUES ('$rec[name]', '$rec[desired_quantity]', '$values[$id]', '$stock_num')";
+                $pdo->exec($insert);
+            } else {
+                $insert = "INSERT INTO StocktakeProds (name, desired_quantity, current_quantityInt, stocktake_num) VALUES ('$rec[name]', '$rec[desired_quantity]', '$values[$id]', '$stock_num')";
+                $pdo->exec($insert);
+            }
         }
-        $pdo->exec($sql);
-        $count++;
     }
+    $count = 0;
+    
 
     ### Add the reference to stocktake_refs
     date_default_timezone_set('Pacific/Auckland');
@@ -59,7 +61,7 @@
 
     $pdo->exec("INSERT INTO StocktakeRefs VALUES ('$date', $stock_num)");
 
-    echo "<script>location.href='../.'</script>";
+    // echo "<script>location.href='../.'</script>";
 
 ?>
 

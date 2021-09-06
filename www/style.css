@@ -44,7 +44,7 @@ h1, h2, h3, p {
 #submit_product {
     margin: auto;
     width: 6em;
-    grid-column: span 2;
+    grid-column: span 3;
 }
 
 #delete_product select, #delete_product input {
@@ -77,10 +77,10 @@ fieldset {
 
 #stocktake {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
-#stocktake p:nth-child(-n+4) {
+#stocktake p:nth-child(-n+3) {
     margin-left: 1em;
     margin-right: 1em;
     font-weight: bold;
@@ -106,7 +106,7 @@ fieldset {
     margin: auto;
     margin-top: 1.5em;
     width: 10em;
-    grid-column: span 4;
+    grid-column: span 3;
 }
 
 th { 
