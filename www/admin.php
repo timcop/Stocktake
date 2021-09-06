@@ -25,35 +25,6 @@
 
         <p>Welcome to the Admin page for Super Bartenders.</p>
 
-        <h2>Previous Stocktakes:</h2>
-
-        <table id="prev_stocktakes">
-            <tr><th>Date</th><th>Stocktake ID #</th><th>Go to stocktake</th></tr>
-
-            <?php
-                ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
-                $db_host   = '127.0.0.1';
-                $db_name   = 'stocktake';
-                $db_user   = 'root';
-                $db_passwd = 'insecure_mysqlroot_pw';
-                $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-
-                # Grab all the Stocktake reference records
-                $q = $pdo->query("SELECT * FROM StocktakeRefs");
-
-                # Display each record
-                while($row = $q->fetch()){
-                echo '<tr><td>';
-                echo $row['dt'];
-                echo '</td><td>';
-                echo $row['stock_num'];
-                echo '<td><a href="scripts/records.php?id='.$row['stock_num'].'"><input type="submit" name="submit" 
-                value="Open" class="Register" /></a></td>';
-                }
-            ?>
-        </table>
-
         <h2>Current Stocktake Products</h2>
             <div id="current">
                 <h3> Spirits </h3>
@@ -195,5 +166,34 @@
                 </form>
             </div>
         </section>
+
+        <h2>Previous Stocktakes:</h2>
+
+        <table id="prev_stocktakes">
+            <tr><th>Date</th><th>Stocktake ID #</th><th>Go to stocktake</th></tr>
+
+            <?php
+                ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
+                $db_host   = '127.0.0.1';
+                $db_name   = 'stocktake';
+                $db_user   = 'root';
+                $db_passwd = 'insecure_mysqlroot_pw';
+                $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+                $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+
+                # Grab all the Stocktake reference records
+                $q = $pdo->query("SELECT * FROM StocktakeRefs");
+
+                # Display each record
+                while($row = $q->fetch()){
+                echo '<tr><td>';
+                echo $row['dt'];
+                echo '</td><td>';
+                echo $row['stock_num'];
+                echo '<td><a href="scripts/records.php?id='.$row['stock_num'].'"><input type="submit" name="submit" 
+                value="Open" class="Register" /></a></td>';
+                }
+            ?>
+        </table>
     </body>
 </html>
