@@ -55,126 +55,96 @@
         </table>
 
         <h2>Current Stocktake Products</h2>
-            <h3> Spirits </h3>
-                <table class="current">
-                    <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
-                    <?php
-                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
-                        $db_host   = '127.0.0.1';
-                        $db_name   = 'stocktake';
-                        $db_user   = 'root';
-                        $db_passwd = 'insecure_mysqlroot_pw';
-                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+            <div id="current">
+                <h3> Spirits </h3>
+                    <table>
+                        <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
+                        <?php
+                            # DB LOGIN
+                            $db_host   = '127.0.0.1';
+                            $db_name   = 'stocktake';
+                            $db_user   = 'root';
+                            $db_passwd = 'insecure_mysqlroot_pw';
 
-                        # Grab all records in Spirits table
-                        $q = $pdo->query("SELECT * FROM Spirits");
+                            $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
-                        # Display them
-                        while($row = $q->fetch()){
-                            echo '<tr><td>';
-                            echo $row["name"];
-                            echo '</td><td>';
-                            echo $row["volume"];
-                            echo '</td><td>';
-                            echo $row["full_weight"];
-                            echo '</td><td>';
-                            echo $row["empty_weight"];
-                            echo '</td><td>';
-                            echo $row["desired_quantity"];
-                            echo '</td></tr>';
-                        }  
-                    ?>
-                </table>
-                <h3> Wine </h3>
-                <table class="current">
-                    <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
-                    <?php
-                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
-                        $db_host   = '127.0.0.1';
-                        $db_name   = 'stocktake';
-                        $db_user   = 'root';
-                        $db_passwd = 'insecure_mysqlroot_pw';
-                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-                        
-                        # Grab all records in Wine table
-                        $q = $pdo->query("SELECT * FROM Wine");
+                            $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+                            # Grab all records in Spirits table, Wine table, Beer table, and Non-Alcoholic table.
+                            $q_Spirits = $pdo->query("SELECT * FROM Spirits");
+                            $q_Wine = $pdo->query("SELECT * FROM Wine");
+                            $q_Beer = $pdo->query("SELECT * FROM Beer");
+                            $q_NonAlc = $pdo->query("SELECT * FROM NonAlc");
 
-                        # Display them
-                        while($row = $q->fetch()){
-                            echo '<tr><td>';
-                            echo $row["name"];
-                            echo '</td><td>';
-                            echo $row["volume"];
-                            echo '</td><td>';
-                            echo $row["full_weight"];
-                            echo '</td><td>';
-                            echo $row["empty_weight"];
-                            echo '</td><td>';
-                            echo $row["desired_quantity"];
-                            echo '</td></tr>';
-                        }  
-                    ?>
-                </table>
-                <h3> Beer </h3>
-                <table class="current">
-                    <tr><th>Product Name</th><th>Desired Quantity</th></tr>
-                    <?php
-                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
-                        $db_host   = '127.0.0.1';
-                        $db_name   = 'stocktake';
-                        $db_user   = 'root';
-                        $db_passwd = 'insecure_mysqlroot_pw';
-                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+                            # Displays Spirits
+                            while($row = $q_Spirits->fetch()){
+                                echo '<tr><td>';
+                                echo $row["name"];
+                                echo '</td><td>';
+                                echo $row["volume"];
+                                echo '</td><td>';
+                                echo $row["full_weight"];
+                                echo '</td><td>';
+                                echo $row["empty_weight"];
+                                echo '</td><td>';
+                                echo $row["desired_quantity"];
+                                echo '</td></tr>';
+                            }
+                            
+                            echo '</table>
+                                    <h3> Wine </h3>
+                                    <table>
+                                        <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>';
+                            # Displays Wine
+                            while($row = $q_Wine->fetch()){
+                                echo '<tr><td>';
+                                echo $row["name"];
+                                echo '</td><td>';
+                                echo $row["volume"];
+                                echo '</td><td>';
+                                echo $row["full_weight"];
+                                echo '</td><td>';
+                                echo $row["empty_weight"];
+                                echo '</td><td>';
+                                echo $row["desired_quantity"];
+                                echo '</td></tr>';
+                            }
+                    
+                            echo '</table>
+                                    <h3> Beer </h3>
+                                    <table>
+                                    <tr><th>Product Name</th><th>Desired Quantity</th></tr>';
+                            # Displays Beer
+                            while($row = $q_Beer->fetch()){
+                                echo '<tr><td>';
+                                echo $row["name"];
+                                echo '</td><td>';
+                                echo $row["desired_quantity"];
+                                echo '</td></tr>';
+                            } 
 
-                        # Grab all records in Beer table
-                        $q = $pdo->query("SELECT * FROM Beer");
-
-                        # Display them
-                        while($row = $q->fetch()){
-                            echo '<tr><td>';
-                            echo $row["name"];
-                            echo '</td><td>';
-                            echo $row["desired_quantity"];
-                            echo '</td></tr>';
-                        }  
-                    ?>
-                </table>
-                <h3> Non-Alcholic </h3>
-                <table class="current">
-                    <tr><th>Product Name</th><th>Desired Quantity</th></tr>
-                    <?php
-                        ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
-                        $db_host   = '127.0.0.1';
-                        $db_name   = 'stocktake';
-                        $db_user   = 'root';
-                        $db_passwd = 'insecure_mysqlroot_pw';
-                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-                        
-                        # Grab all records in NonAlc table
-                        $q = $pdo->query("SELECT * FROM NonAlc");
-
-                        # Display them
-                        while($row = $q->fetch()){
-                            echo '<tr><td>';
-                            echo $row["name"];
-                            echo '</td><td>';
-                            echo $row["desired_quantity"];
-                            echo '</td></tr>';
-                        }  
-                    ?>
-                </table>
-
+                            echo '</table>
+                                    <h3> Non-Alcholic </h3>
+                                    <table>
+                                    <tr><th>Product Name</th><th>Desired Quantity</th></tr>';
+                            # Displays Non-Alcoholic
+                            while($row = $q_NonAlc->fetch()){
+                                echo '<tr><td>';
+                                echo $row["name"];
+                                echo '</td><td>';
+                                echo $row["desired_quantity"];
+                                echo '</td></tr>';
+                            }
+                        ?>
+                    </table>
+                </div>
         <section class="admin_section">
             <h2>Add a new Product.</h2>
             <!-- A form to insert a product, this is sent to insert_product.php with the inputs-->
             <form method="post" enctype="aplication/x-www-form-urlencoded" action="scripts/insert_product.php">
                 <fieldset id="add_product">
-                    <label for="name">Name of Product: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
-                    <label for="type">Product Type: </label>
+                    <p id=required_text>* Required Information</p>
+                    <label for="name">Name of Product*: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
+                    <label for="type">Product Type*: </label>
                     <select name="category" id="category">
                         <option value="Spirits">Spirits</option>
                         <option value="Wine">Wine</option>
@@ -184,7 +154,7 @@
                     <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
                     <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
                     <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
-                    <label for="dq">Desired Quantity:</label><input type="number" id="dq" name="dq" min="1" max="1000" placeholder="(1-1000)"required>
+                    <label for="dq">Desired Quantity*:</label><input type="number" id="dq" name="dq" min="1" max="1000" placeholder="(1-1000)"required>
                     <input type="submit" value="Submit" id="submit_product">
                 </fieldset>
             </form>
