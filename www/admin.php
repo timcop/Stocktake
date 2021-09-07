@@ -7,12 +7,12 @@
         <script>
             function showOptions(element) {
                 var selectedValue = element.options[element.selectedIndex].value;
-                if (selectedValue == "each") {
-                    document.querySelectorAll('.liquid').forEach(function(element) {
+                if (selectedValue == "Beer" || selectedValue == "NonAlc") {
+                    document.querySelectorAll('.each').forEach(function(element) {
                     element.style.display = "none";
                 });
                 } else {
-                    document.querySelectorAll('.liquid').forEach(function(element) {
+                    document.querySelectorAll('.each').forEach(function(element) {
                     element.style.display = "inline-block";
                 });
                 }
@@ -117,15 +117,15 @@
                         <p id=required_text>* Required Information</p>
                         <label for="name">Name of Product*: </label><input type="text" placeholder="Product Name" id="name" name="name" maxlength="50" required>
                         <label for="type">Product Type*: </label>
-                        <select name="category" id="category">
+                        <select name="category" id="category" onchange="showOptions(this)">
                             <option value="Spirits">Spirits</option>
                             <option value="Wine">Wine</option>
                             <option value="Beer">Beer</option>
                             <option value="NonAlc">NonAlc</option>
                         </select>
-                        <label for="volume" class="liquid">Volume: </label><input type="number" placeholder="Volume" id="volume" class="liquid" name="volume" min="0">
-                        <label for="full_weight" class="liquid">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="liquid" name="full_weight" min="0">
-                        <label for="empty_weight" class="liquid">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="liquid" name="empty_weight" min="0">
+                        <label for="volume" class="each">Volume: </label><input type="number" placeholder="Volume" id="volume" class="each" name="volume" min="0">
+                        <label for="full_weight" class="each">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="each" name="full_weight" min="0">
+                        <label for="empty_weight" class="each">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="each" name="empty_weight" min="0">
                         <label for="dq">Desired Quantity*:</label><input type="number" id="dq" name="dq" min="1" max="1000" placeholder="(1-1000)"required>
                         <input type="submit" value="Submit" id="submit_product">
                     </fieldset>
@@ -170,7 +170,7 @@
         <h2>Previous Stocktakes:</h2>
 
         <table id="prev_stocktakes">
-            <tr><th>Date</th><th>Stocktake ID #</th><th>Go to stocktake</th></tr>
+            <tr><th>Date</th><th>Stocktake ID #</th><th>Go to Stocktake</th></tr>
 
             <?php
                 ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
