@@ -36,5 +36,5 @@
         $pdo->exec($sql);
     }
 
-    echo "<script>location.href='../admin.php'</script>";
+    echo "<script>location.href='../index.php'</script>";
 ?>

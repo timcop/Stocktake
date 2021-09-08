@@ -13,15 +13,15 @@ Vagrant.configure("2") do |config|
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
   config.vm.define "webserver" do |webserver|
     webserver.vm.hostname = "webserver"
-    webserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+    # webserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
     webserver.vm.network "private_network", ip: "192.168.2.11"
 
     webserver.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y apache2 php libapache2-mod-php php-mysql
 
-      cp /vagrant/test-website.conf /etc/apache2/sites-available/
-      a2ensite test-website
+      cp /vagrant/admin-website.conf /etc/apache2/sites-available/
+      a2ensite admin-website
       a2dissite 000-default
       service apache2 reload
     SHELL
@@ -29,15 +29,15 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "webserverAdmin" do |webserverAdmin|
     webserverAdmin.vm.hostname = "webserverAdmin"
-    # webserverAdmin.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+    # webserverAdmin.vm.network "forwarded_port", guest: 81, host: 8081, host_ip: "127.0.0.1"
     webserverAdmin.vm.network "private_network", ip: "192.168.2.13"
 
     webserverAdmin.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y apache2 php libapache2-mod-php php-mysql
 
-      cp /vagrant/test-website.conf /etc/apache2/sites-available/
-      a2ensite test-website
+      cp /vagrant/user-website.conf /etc/apache2/sites-available/
+      a2ensite user-website
       a2dissite 000-default
       service apache2 reload
     SHELL

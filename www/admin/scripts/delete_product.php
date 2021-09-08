@@ -24,5 +24,5 @@
         $pdo->exec($query);
     }
 
-    echo "<script>location.href='../admin.php'</script>"; # Return to admin page 
+    echo "<script>location.href='../index.php'</script>"; # Return to admin page 
 ?>
