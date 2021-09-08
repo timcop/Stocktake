@@ -1,7 +1,7 @@
 <?php
     ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
 
-    $db_host = '127.0.0.1';
+    $db_host = '192.168.2.12';
     $db_name = 'stocktake';
     $db_user = 'root';
     $db_passwd = 'insecure_mysqlroot_pw';
