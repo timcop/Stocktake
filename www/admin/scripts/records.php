@@ -21,11 +21,11 @@
 
             # Select the products and display them
             $q = $pdo->query("SELECT * FROM StocktakeProds WHERE stocktake_num=$stock_num");
+            
             echo "<h1>Stocktake Record #$stock_num</h1>\n
                     <table>\n
                     <tr>\n
                     <th>Name</th>
-                    <th>Type</th>
                     <th>Desired Quantity</th>
                     <th>Current Quantity</th>
                     </tr>";
@@ -33,8 +33,6 @@
             while ($row = $q->fetch()) {
                 echo '<tr><td>';
                 echo $row['name'];
-                echo '</td><td>';
-                echo $row['type'];
                 echo '</td><td>';
                 echo $row['desired_quantity'];
                 echo '</td><td>';
