@@ -23,7 +23,7 @@
             $q = $pdo->query("SELECT * FROM StocktakeProds WHERE stocktake_num=$stock_num");
             
             echo "<h1>Stocktake Record #$stock_num</h1>\n
-                    <table>\n
+                    <table id='record'>\n
                     <tr>\n
                     <th>Name</th>
                     <th>Desired Quantity</th>

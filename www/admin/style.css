@@ -114,22 +114,22 @@ fieldset {
     margin: auto;
 }
 
-#current th {
+#current th, #record th {
     width: 10em;
     text-align: center;
 }
 
-#current th:nth-of-type(1) {
+#current th:nth-of-type(1), #record th:nth-of-type(1) {
     text-align: left;
 }
 
-#current td {
+#current td, #record td {
     height: 1em;
     text-align: center;
     /* width: 9em; */
 }
 
-#current tr > td:nth-of-type(1) {
+#current tr > td:nth-of-type(1), #record tr > td:nth-of-type(1) {
     height: 1em;
     text-align: left;
     /* width: 9em; */
