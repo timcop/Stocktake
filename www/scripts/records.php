@@ -7,6 +7,8 @@
 
     <body>
         <?php
+
+            ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
             $db_host = '127.0.0.1';
             $db_name = 'stocktake';
             $db_user = 'root';
@@ -14,7 +16,10 @@
             $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
             $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
+            # Get the id of the stocktake instance selected from the POST button from HTML 
             $stock_num = $_REQUEST['id'];
+
+            # Select the products and display them
             $q = $pdo->query("SELECT * FROM StocktakeProds WHERE stocktake_num=$stock_num");
             echo "<h1>Stocktake Record #$stock_num</h1>\n
                     <table>\n

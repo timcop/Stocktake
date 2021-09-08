@@ -1,37 +1,38 @@
 <?php
+
+    ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
     $db_host = '127.0.0.1';
     $db_name = 'stocktake';
     $db_user = 'root';
-    $db_passwd = 'insecure_mysqlroot_pw';
+    $db_passwd = 'insecure_mysqlroot_pw';   
+    $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+    $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
     ## Must have these
     $product_name = $_REQUEST['name'];
-    $product_type = $_REQUEST['type'];
-    $product_unit = $_REQUEST['unit'];
     $desired_quantity = $_REQUEST['dq'];
+    $product_category = $_REQUEST['category'];
 
     ## Optional
     $product_volume = $_REQUEST['volume'];
     $product_fullWeight = $_REQUEST['full_weight'];
     $product_emptyWeight = $_REQUEST['empty_weight'];
 
-
-    $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
-    $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-    $sql = "INSERT INTO Products (name, type, unit, desired_quantity) VALUES ('$product_name', '$product_type', '$product_unit', $desired_quantity)";
+    # First insert record into the respective table with the must have values
+    $sql = "INSERT INTO $product_category (name, desired_quantity) VALUES ('$product_name', $desired_quantity)";
     $pdo->exec($sql);
 
-    if (!empty($product_volume)) {
-        $sql = "UPDATE Products SET vol=$product_volume WHERE name='$product_name'";
+    # Then check for the optional values existing, if so update the record created in the previous step
+    if (!empty($product_volume)) { 
+        $sql = "UPDATE $product_category SET volume=$product_volume WHERE name='$product_name'";
         $pdo->exec($sql);
     }
     if (!empty($product_fullWeight)) {
-        $sql = "UPDATE Products SET full_weight=$product_fullWeight WHERE name='$product_name'";
+        $sql = "UPDATE $product_category SET full_weight=$product_fullWeight WHERE name='$product_name'";
         $pdo->exec($sql);
     }
     if (!empty($product_emptyWeight)) {
-        $sql = "UPDATE Products SET empty_weight=$product_emptyWeight WHERE name='$product_name'";
+        $sql = "UPDATE $product_category SET empty_weight=$product_emptyWeight WHERE name='$product_name'";
         $pdo->exec($sql);
     }
 
