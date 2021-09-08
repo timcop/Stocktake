@@ -1,0 +1,171 @@
+body {
+    background-color: #101255;
+}
+
+table {
+    margin: auto;
+    padding: 1em 1em;
+}
+
+/* Font theme */
+h1, h2, h3,p, th, td, label, input, select{
+    font-family: "Helvetica", Sans-serif;
+}
+
+h1, h2, h3, p, th, td, label {
+    color: #F0F3F6;
+}
+
+h1, h2, h3, p {
+    text-align: center;
+}
+
+#prev_stocktakes td, #prev_stocktakes th {
+    text-align: center;
+}
+
+#calculator {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#vol_calc {
+    padding-top: 1em;
+    display: none;
+}
+
+#add_product {
+    padding-top: 1em;
+    display: grid;
+    grid-template-columns: 12em 10em;
+    row-gap: 0.6em;
+    justify-content: center;
+}
+
+#required_text {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    grid-column: span 2;
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+#submit_product {
+    margin: auto;
+    width: 6em;
+    grid-column: span 2;
+}
+
+#delete_product select, #delete_product input {
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    text-align: center;
+    display: block;
+    width: 20em;
+}
+
+#blank_cell {
+    padding-left: 1em;
+}
+
+.admin_section {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 75%;
+}
+
+.admin_section div:nth-of-type(2) {
+    align-self: center;
+}
+
+input, select {
+    margin: auto;
+    display: inline-block;
+    width: 10em;
+}
+
+fieldset {
+    width: 60%;
+    margin: auto;
+}
+
+#stocktake {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#stocktake p:nth-child(-n+3) {
+    margin-left: 1em;
+    margin-right: 1em;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#stocktake p + input {
+    height: 1em;
+    width: 8em;
+    margin: auto;
+}
+
+#current {
+    padding: 0.5em 2em 2em 2em;
+    width: 60%;
+    margin: auto;
+}
+
+#current th {
+    width: 10em;
+    text-align: center;
+}
+
+#current th:nth-of-type(1) {
+    text-align: left;
+}
+
+#current td {
+    height: 1em;
+    text-align: center;
+    /* width: 9em; */
+}
+
+#current tr > td:nth-of-type(1) {
+    height: 1em;
+    text-align: left;
+    /* width: 9em; */
+}
+
+#current table {
+    border: 1px solid #F0F3F6;
+
+}
+
+#submit_stocktake {
+    margin: auto;
+    margin-top: 1.5em;
+    width: 10em;
+    grid-column: span 3;
+}
+
+th { 
+    text-align: left;
+    font-size: 1.05em;
+}
+
+fieldset {
+    border: none;
+}
+
+table, th, td, fieldset, #current {
+background-color: #406de7;
+border-radius: 15px;
+}
+
+th, td {
+    padding: 0.2em;
+}
+
+form { 
+    margin: auto;
+    text-align: center;
+}
