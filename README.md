@@ -1,10 +1,14 @@
 # Stocktake
 
-An app to aid in the **stocktake** process for bars 
+A web application to aid in the **stocktake** process for bars.
+We will use three virtual machines to host two web servers and a relational database. 
 
 ### Contents
 
 [Description](#description-)
+
+[Virtual Machines](#virtual-machines-)
+
 [Installation and Usage](#installation-and-usage-)
 
 ## Description
@@ -39,7 +43,9 @@ Our aim is to provide tools for the owner to monitor the stocktakes that have be
 - Assign desired quantity to products.
 - Assign weights to products measured by volume.
 
-### 6. Virtual Machine 1
+## Virtual Machines
+
+### Virtual Machine 1
 
 Virtual Machine (VM) 1 is the index of the client site, which uses 'index.php'. The client site can:
 
@@ -47,7 +53,7 @@ Virtual Machine (VM) 1 is the index of the client site, which uses 'index.php'. 
 -	Write new stocktakes to the database using ‘submit_stocktake.php’.
  
 
-### 7. Virtual Machine 2
+### Virtual Machine 2
 
 The second VM is the admin site, which uses ‘admin.php’. The admin site can:
 -	Read the products and all related information in the database such as volume and weights.
@@ -56,7 +62,7 @@ The second VM is the admin site, which uses ‘admin.php’. The admin site can:
 -	Add new stocktake products to the database using ‘insert_product.php’.
 
 
-### 8. Virtual Machine 3
+### Virtual Machine 3
 
 The third VM is the MySQL server which provides the database for the application and receives queries from VM 1 & VM 2.
 
