@@ -1,7 +1,7 @@
 # Stocktake
 
 A web application to aid in the **stocktake** process for bars.
-We will use three virtual machines to host two web servers and a relational database. 
+We are using three virtual machines to host two web servers and a relational database. 
 
 ### Contents
 
