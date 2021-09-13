@@ -1,7 +1,9 @@
 * text=auto
 
+# Code taken from COSC349 Lab 06.
 # Ensures that on Windows text files are checked out with Unix line endings,
 # as the VM's are running Linux
 
-setup-database.sql text eol=lf
-test-website.conf text eol=lf
+db/* text eol=lf
+client/* text eol=lf
+admin/* text eol=lf
