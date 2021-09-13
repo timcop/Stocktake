@@ -1,6 +1,6 @@
 <?php
-    ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
 
+    ## DB LOGIN
     $db_host = '192.168.2.12';
     $db_name = 'stocktake';
     $db_user = 'admin';

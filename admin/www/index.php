@@ -139,7 +139,7 @@
                     <fieldset id="delete_product">
                         <select name="product" id="name">
                             <?php
-                                ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
+                                ## DB LOGIN
                                 $db_host   = '192.168.2.12';
                                 $db_name   = 'stocktake';
                                 $db_user   = 'admin';
@@ -173,7 +173,7 @@
             <tr><th>Date</th><th>Stocktake ID #</th><th>Go to Stocktake</th></tr>
 
             <?php
-                ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
+                ## DB LOGIN
                 $db_host   = '192.168.2.12';
                 $db_name   = 'stocktake';
                 $db_user   = 'admin';

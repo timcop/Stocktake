@@ -1,6 +1,6 @@
 <?php
 
-    ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
+    ## DB LOGIN
     $db_host = '192.168.2.12';
     $db_name = 'stocktake';
     $db_user = 'admin';
@@ -36,5 +36,5 @@
         $pdo->exec($sql);
     }
 
-    echo "<script>location.href='../index.php'</script>";
+    echo "<script>location.href='../index.php'</script>"; #Return to index page
 ?>
