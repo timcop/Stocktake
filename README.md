@@ -1,3 +1,6 @@
+
+
+
 # Stocktake
 
 A web application to aid in the **stocktake** process for bars.
@@ -82,6 +85,9 @@ To install our application, you computer will need to support virtualisation. Yo
 <a name="myfootnote1">1</a>: *Other versions have not been tested, so if problems occur please install the same versions the application was built on. If problems still occur, please add the problems to our GitHub Issues.*
 
 ### Installation, Starting, and Stopping.
+
+https://user-images.githubusercontent.com/70932357/133018068-1f1b82de-c086-456c-b28a-c34ea0c28c6f.mp4
+
 To begin installing our application, you will first need to clone the repo.
 
 - `git clone https://github.com/timcop/Stocktake`
