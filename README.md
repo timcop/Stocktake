@@ -84,7 +84,7 @@ To install our application, you computer will need to support virtualisation. Yo
 ### Installation, Starting, and Stopping.
 To begin installing our application, you will first need to clone the repo.
 
-- `git clone https://github.com/timcop/Stocktake.git`
+- `git clone https://github.com/timcop/Stocktake`
 
 Once you have successfully cloned the repo, cd into the repository.
 
