@@ -56,16 +56,3 @@ CREATE TABLE StocktakeProds (
 	 dt DATETIME NOT NULL,
 	 stock_num INTEGER NOT NULL
  );
-
-INSERT INTO Spirits (name, volume, full_weight, empty_weight, desired_quantity) VALUES ('Talisker 10YO Whiskey', 700, 1200, 400, 5);
-INSERT INTO Spirits (name, desired_quantity) VALUES ('Jameson Irish Whiskey', 8);
-
-INSERT INTO Wine (name, volume, full_weight, empty_weight, desired_quantity) VALUES ('Dog Point Sauvigon Blanc', 750, 1000, 250, 24);
-INSERT INTO Wine (name, desired_quantity) VALUES ('Wooing Tree Beetlejuice Pinot Noir', 12);
-
-INSERT INTO Beer (name, desired_quantity) VALUES ('Corona', 48);
-INSERT INTO Beer (name, desired_quantity) VALUES ('Peroni', 48);
-
-INSERT INTO NonAlc (name, desired_quantity) VALUES ('Fever Tree Tonic', 48);
-INSERT INTO NonAlc (name, desired_quantity) VALUES ('Angostura Bitters', 4);
-

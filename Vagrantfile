@@ -67,6 +67,8 @@ Vagrant.configure("2") do |config|
 
       export MYSQL_PWD='insecure_db_pw'
       cat /vagrant/setup-database.sql | mysql -u user stocktake
+      cat /vagrant/demo-values.sql | mysql -u user stocktake # DEMO VALUES 
+
       sed -i'' -e '/bind-address/s/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
       service mysql restart
     SHELL
