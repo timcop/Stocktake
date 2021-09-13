@@ -1,0 +1,7 @@
+* text=auto
+
+# Ensures that on Windows text files are checked out with Unix line endings,
+# as the VM's are running Linux
+
+setup-database.sql text eol=lf
+test-website.conf text eol=lf

@@ -123,7 +123,7 @@
                             <option value="Beer">Beer</option>
                             <option value="NonAlc">NonAlc</option>
                         </select>
-                        <label for="volume" class="each">Volume: </label><input type="number" placeholder="Volume" id="volume" class="each" name="volume" min="0">
+                        <label for="volume" class="each">Volume (ml): </label><input type="number" placeholder="Volume" id="volume" class="each" name="volume" min="0">
                         <label for="full_weight" class="each">Full Weight (g): </label><input type="number" placeholder="Full Weight" id="full_weight" class="each" name="full_weight" min="0">
                         <label for="empty_weight" class="each">Empty Weight (g): </label><input type="number" placeholder="Empty Weight" id="empty_weight" class="each" name="empty_weight" min="0">
                         <label for="dq">Desired Quantity*:</label><input type="number" id="dq" name="dq" min="1" max="1000" placeholder="(1-1000)"required>
