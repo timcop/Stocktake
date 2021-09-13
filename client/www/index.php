@@ -13,7 +13,9 @@
             }
 
             // Calculates the current volume of a bottle and displays it for the user 
-            function calculateVolume(element) {
+            function calculateVolume(e) {
+
+                e.preventDefault();
 
                 var values = document.getElementById('converter').selectedOptions[0].value
                 var current_weight = document.getElementById('current_weight').value;
@@ -98,11 +100,11 @@
         </section>
         <section>
             <h2>Calculator to convert weight into volume!</h2>
-            <form>
+            <form action="#" onsubmit="calculateVolume(event)">
                 <fieldset id="calculator">
                     <select name="product" id="converter">
                         <?php
-                            ## DB LOGIN, NEEDS REWORKING FOR VIRTUAL SPLIT
+                            ## DB LOGIN
                             $db_host   = '192.168.2.12';
                             $db_name   = 'stocktake';
                             $db_user   = 'user';
@@ -127,7 +129,7 @@
                     </select>
                     <label for="current_weight">Current Weight (g): </label>
                     <input type="number" placeholder="Current Weight" id="current_weight" name="current_weight" min="0">
-                    <input type="button" value="Calculate!" onclick="calculateVolume(this)">
+                    <input type="submit" value="Calculate!">
                     <p id="vol_calc"></p>
                 </fieldset>
             </form>
