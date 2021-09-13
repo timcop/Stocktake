@@ -5,11 +5,11 @@ We are using three virtual machines to host two web servers and a relational dat
 
 ### Contents
 
-[Description](#description-)
+[Description](#description)
 
-[Virtual Machines](#virtual-machines-)
+[Virtual Machines](#virtual-machines)
 
-[Installation and Usage](#installation-and-usage-)
+[Installation and Usage](#installation-and-usage)
 
 ## Description
 
