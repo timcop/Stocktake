@@ -94,7 +94,7 @@
                             } 
 
                             echo '</table>
-                                    <h3> Non-Alcholic </h3>
+                                    <h3> Non-Alcoholic </h3>
                                     <table>
                                     <tr><th>Product Name</th><th>Desired Quantity</th></tr>';
                             # Displays Non-Alcoholic
