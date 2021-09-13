@@ -71,8 +71,15 @@ The third VM is the MySQL server which provides the database for the application
 ### Requirements
 
 To install our application, you computer will need to support virtualisation. You will need to install the following:
-- Vagrant
-- VirtualBox
+- Vagrant (*v2.2.x*)
+  - Built on *v2.2.16* but any *v2.2.x* should be ok <sup>[1](#myfootnote1)</sup>
+
+  - Follow the installation guide for your operating system found [here](https://www.vagrantup.com/docs/installation)
+- VirtualBox (*v6.1.x*)
+  - Built on *v6.1.26* but any *v6.1.x* 'should' be ok <sup>[1](#myfootnote1)</sup>
+  -   Follow the installation guide for your operating system found [here](https://www.virtualbox.org/manual/ch02.html)
+
+<a name="myfootnote1">1</a>: *Other versions have not been tested, so if problems occur please install the same versions the application was built on. If problems still occur, please add the problems to our GitHub Issues.*
 
 ### Installation, Starting, and Stopping.
 To begin installing our application, you will first need to clone the repo.
@@ -103,3 +110,4 @@ To use the application as an admin, visit [192.168.2.11](http://192.168.2.11) in
 After making changes to the source code you might want to restart a specific rather than all three VMs to test your changes. To do so, use the following commands: 
 - `vagrant destroy [name]`
 - `vagrant up [name]`
+
