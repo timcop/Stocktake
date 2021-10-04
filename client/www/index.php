@@ -1,3 +1,17 @@
+<?php
+    // Initialize the session
+    session_start();
+    
+    // Check if the user is logged in, otherwise redirect to login page
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: signing/login.php");
+        exit;
+    }
+    // Include config file
+    require_once "config.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -70,14 +84,7 @@
                     <p>Desired Quantity</p>
                     <p>Current Quantity</p>
                     <?php
-                        ## DB LOGIN
-                        $db_host   = '192.168.2.12';
-                        $db_name   = 'stocktake';
-                        $db_user   = 'user';
-                        $db_passwd = 'insecure_db_pw';
-                        $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                        $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-
+ 
                         # Loop through the tables displaying each item with current_count input as an option next to each
                         $tables = array("Spirits", "Wine", "Beer", "NonAlc");
                         foreach($tables as $table) {
@@ -104,13 +111,6 @@
                 <fieldset id="calculator">
                     <select name="product" id="converter">
                         <?php
-                            ## DB LOGIN
-                            $db_host   = '192.168.2.12';
-                            $db_name   = 'stocktake';
-                            $db_user   = 'user';
-                            $db_passwd = 'insecure_db_pw';
-                            $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                            $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
                             # Union spirits and wine as these are the only tables that can be used with the calculator 
                             $sql = "SELECT * FROM Spirits UNION SELECT * FROM Wine";
@@ -134,5 +134,13 @@
                 </fieldset>
             </form>
         </section>
+        <div>
+        <section>
+            <h2>Logout</h2>
+            <form action="signing/logout.php">
+                <input type="submit" value="Logout"/>
+            </form>
+        </section>
+        </div>
     </body>
 </html>

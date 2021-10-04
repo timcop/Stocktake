@@ -1,3 +1,17 @@
+<?php
+    // Initialize the session
+    session_start();
+    
+    // Check if the user is logged in, otherwise redirect to login page
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: signing/login.php");
+        exit;
+    }
+
+    require_once('config.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,15 +45,7 @@
                     <table>
                         <tr><th>Product Name</th><th>Volume (ml)</th><th>Full Weight (g)</th><th>Empty Weight (g)</th><th>Desired Quantity</th></tr>
                         <?php
-                            # DB LOGIN
-                            $db_host   = '192.168.2.12';
-                            $db_name   = 'stocktake';
-                            $db_user   = 'admin';
-                            $db_passwd = 'insecure_db_admin_pw';
-
-                            $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-
-                            $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+ 
                             # Grab all records in Spirits table, Wine table, Beer table, and Non-Alcoholic table.
                             $q_Spirits = $pdo->query("SELECT * FROM Spirits");
                             $q_Wine = $pdo->query("SELECT * FROM Wine");
@@ -139,15 +145,7 @@
                     <fieldset id="delete_product">
                         <select name="product" id="name">
                             <?php
-                                ## DB LOGIN
-                                $db_host   = '192.168.2.12';
-                                $db_name   = 'stocktake';
-                                $db_user   = 'admin';
-                                $db_passwd = 'insecure_db_admin_pw';
-                                $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                                $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
-
-                                # Union all the tables selecting just name and desired_quantity 
+ 
                                 $sql = "SELECT name, desired_quantity FROM Spirits
                                 UNION SELECT name, desired_quantity FROM Wine
                                 UNION SELECT name, desired_quantity FROM Beer
@@ -173,15 +171,7 @@
             <tr><th>Date</th><th>Stocktake ID #</th><th>Go to Stocktake</th></tr>
 
             <?php
-                ## DB LOGIN
-                $db_host   = '192.168.2.12';
-                $db_name   = 'stocktake';
-                $db_user   = 'admin';
-                $db_passwd = 'insecure_db_admin_pw';
-                $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
-                $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-                # Grab all the Stocktake reference records
                 $q = $pdo->query("SELECT * FROM StocktakeRefs");
 
                 # Display each record
@@ -195,5 +185,13 @@
                 }
             ?>
         </table>
+
+        <section>
+            <h2>Logout</h2>
+            <form action="signing/logout.php">
+                <input type="submit" value="Logout"/>
+            </form>
+        </section>
+
     </body>
 </html>
